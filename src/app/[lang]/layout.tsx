@@ -1,6 +1,6 @@
 /**
  * 언어별 레이아웃 컴포넌트
- * 각 언어 경로(/ko, /ja, /en)에 공통 레이아웃을 제공합니다
+ * 각 언어 경로(/ko, /jp, /en)에 공통 레이아웃을 제공합니다
  */
 
 import Link from "next/link";
@@ -21,7 +21,7 @@ const geistMono = Geist_Mono({
 // 언어별 네비게이션 텍스트
 const navTexts: Record<string, { home: string; blog: string }> = {
     ko: { home: "홈", blog: "블로그" },
-    ja: { home: "ホーム", blog: "ブログ" },
+    jp: { home: "ホーム", blog: "ブログ" },
     en: { home: "Home", blog: "Blog" },
 };
 
@@ -36,16 +36,16 @@ export async function generateMetadata({
     const { lang } = await params;
     const langNames: Record<string, string> = {
         ko: "한국어",
-        ja: "日本語",
+        jp: "日本語",
         en: "English",
     };
 
     return {
         title: {
-            default: "Tech Blog",
-            template: "%s | Tech Blog",
+            default: "Sanghyeon's Devlog",
+            template: "%s | Sanghyeon's Devlog",
         },
-        description: `${langNames[lang]} 기술 블로그`,
+        description: `${langNames[lang]} 스터디 일지`,
         metadataBase: new URL("https://your-domain.com"), // 실제 도메인으로 변경 필요
     };
 }
@@ -77,7 +77,7 @@ export default async function LangLayout({
                                     href={`/${lang}`}
                                     className="text-xl font-bold text-gray-900 hover:text-blue-600 transition-colors"
                                 >
-                                    Tech Blog
+                                    S Devlog
                                 </Link>
 
                                 {/* 메인 네비게이션 */}
@@ -109,13 +109,13 @@ export default async function LangLayout({
                                     KO
                                 </Link>
                                 <Link
-                                    href="/ja"
-                                    className={`px-2 py-1 rounded text-sm transition-colors ${lang === "ja"
+                                    href="/jp"
+                                    className={`px-2 py-1 rounded text-sm transition-colors ${lang === "jp"
                                         ? "bg-blue-100 text-blue-800 font-medium"
                                         : "text-gray-600 hover:text-blue-600"
                                         }`}
                                 >
-                                    JA
+                                    JP
                                 </Link>
                                 <Link
                                     href="/en"
@@ -134,7 +134,7 @@ export default async function LangLayout({
                 <main className="min-h-screen bg-gray-50">{children}</main>
 
                 {/* 푸터 */}
-                <footer className="bg-white border-t border-gray-200 mt-12">
+                <footer className="bg-white border-t border-gray-200">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                         <p className="text-center text-gray-500 text-sm">
                             © {new Date().getFullYear()} Tech Blog. All rights reserved.

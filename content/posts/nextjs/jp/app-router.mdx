@@ -6,8 +6,6 @@ tags: ["Next.js", "App Router", "React"]
 description: "Next.js 13+ App Routerの核心概念と使い方を完全に理解する"
 ---
 
-# Next.js App Router完全ガイド
-
 Next.js App Routerは、React Server Componentsを基盤とした新しいルーティングシステムです。このガイドでは、App Routerの核心概念を扱います。
 
 ## App Routerとは？
@@ -24,7 +22,7 @@ App Routerは`app`ディレクトリを基盤とする新しいルーティン�
 export default async function Page() {
   const data = await fetch('https://api.example.com/data');
   const json = await data.json();
-  
+
   return <div>{json.title}</div>;
 }
 ```
@@ -75,7 +73,7 @@ async function getPosts() {
 
 export default async function PostsPage() {
   const posts = await getPosts();
-  
+
   return (
     <ul>
       {posts.map(post => (
@@ -93,7 +91,7 @@ export default async function PostsPage() {
 ```typescript
 export async function generateStaticParams() {
   const posts = await getPosts();
-  
+
   return posts.map((post) => ({
     slug: post.slug,
   }));

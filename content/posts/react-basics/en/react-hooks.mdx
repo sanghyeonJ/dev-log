@@ -6,8 +6,6 @@ tags: ["React", "Hooks", "JavaScript"]
 description: "Understanding React Hooks from basic concepts to advanced patterns"
 ---
 
-# Complete Guide to React Hooks
-
 React Hooks are powerful features that allow you to use state and lifecycle features in function components.
 
 ## useState
@@ -19,7 +17,7 @@ import { useState } from 'react';
 
 function Counter() {
   const [count, setCount] = useState(0);
-  
+
   return (
     <div>
       <p>Current count: {count}</p>
@@ -38,13 +36,13 @@ import { useEffect, useState } from 'react';
 
 function DataFetcher() {
   const [data, setData] = useState(null);
-  
+
   useEffect(() => {
     fetch('/api/data')
       .then(res => res.json())
       .then(setData);
   }, []); // Empty array runs only once on mount
-  
+
   return <div>{data ? JSON.stringify(data) : 'Loading...'}</div>;
 }
 ```
@@ -59,12 +57,12 @@ function useLocalStorage(key: string, initialValue: string) {
     const item = window.localStorage.getItem(key);
     return item ? JSON.parse(item) : initialValue;
   });
-  
+
   const setStoredValue = (newValue: string) => {
     setValue(newValue);
     window.localStorage.setItem(key, JSON.stringify(newValue));
   };
-  
+
   return [value, setStoredValue];
 }
 ```

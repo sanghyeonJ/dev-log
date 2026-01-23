@@ -6,8 +6,6 @@ tags: ["Next.js", "App Router", "React"]
 description: "Next.js 13+ App Router의 핵심 개념과 사용법을 완벽하게 이해하기"
 ---
 
-# Next.js App Router 완벽 가이드
-
 Next.js App Router는 React Server Components를 기반으로 한 새로운 라우팅 시스템입니다. 이 가이드에서는 App Router의 핵심 개념을 다룹니다.
 
 ## App Router란?
@@ -24,7 +22,7 @@ App Router는 `app` 디렉토리를 기반으로 하는 새로운 라우팅 시�
 export default async function Page() {
   const data = await fetch('https://api.example.com/data');
   const json = await data.json();
-  
+
   return <div>{json.title}</div>;
 }
 ```
@@ -75,7 +73,7 @@ async function getPosts() {
 
 export default async function PostsPage() {
   const posts = await getPosts();
-  
+
   return (
     <ul>
       {posts.map(post => (
@@ -93,7 +91,7 @@ export default async function PostsPage() {
 ```typescript
 export async function generateStaticParams() {
   const posts = await getPosts();
-  
+
   return posts.map((post) => ({
     slug: post.slug,
   }));

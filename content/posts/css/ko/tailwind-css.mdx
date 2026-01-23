@@ -6,8 +6,6 @@ tags: ["Tailwind CSS", "CSS", "스타일링"]
 description: "Tailwind CSS의 유틸리티 클래스를 활용한 효율적인 스타일링 방법"
 ---
 
-# Tailwind CSS로 빠르게 스타일링하기
-
 Tailwind CSS는 유틸리티 우선(utility-first) CSS 프레임워크로, 빠르고 일관된 UI를 구축할 수 있게 해줍니다.
 
 ## Tailwind CSS란?
@@ -33,12 +31,14 @@ Tailwind CSS는 미리 정의된 유틸리티 클래스를 사용하여 HTML 요
 Tailwind는 모바일 우선 접근 방식을 사용합니다.
 
 ```jsx
-<div className="
+<div
+  className="
   text-sm          // 기본 (모바일)
   md:text-base     // 중간 크기 이상
   lg:text-lg       // 큰 화면
   xl:text-xl       // 매우 큰 화면
-">
+"
+>
   반응형 텍스트
 </div>
 ```
@@ -46,10 +46,12 @@ Tailwind는 모바일 우선 접근 방식을 사용합니다.
 ## 다크 모드
 
 ```jsx
-<div className="
+<div
+  className="
   bg-white dark:bg-gray-800
   text-gray-900 dark:text-white
-">
+"
+>
   다크 모드 지원
 </div>
 ```
@@ -94,11 +96,8 @@ const Button = ({ children }) => (
 ```javascript
 // tailwind.config.js
 module.exports = {
-  plugins: [
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/typography'),
-  ],
-}
+  plugins: [require("@tailwindcss/forms"), require("@tailwindcss/typography")],
+};
 ```
 
 ## 결론

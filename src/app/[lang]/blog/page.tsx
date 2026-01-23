@@ -10,7 +10,7 @@ import type { Metadata } from 'next';
 // 언어별 페이지 제목 매핑
 const pageTitles: Record<string, string> = {
     ko: '블로그',
-    ja: 'ブログ',
+    jp: 'ブログ',
     en: 'Blog',
 };
 
@@ -31,6 +31,127 @@ export async function generateMetadata({
     };
 }
 
+// 페이지당 포스트 수
+const POSTS_PER_PAGE = 10;
+
+/**
+ * 페이지네이션 컴포넌트
+ */
+function Pagination({
+    currentPage,
+    totalPages,
+    lang,
+    category,
+}: {
+    currentPage: number;
+    totalPages: number;
+    lang: string;
+    category?: string;
+}) {
+    const pageNumbers: number[] = [];
+    
+    // 표시할 페이지 번호 계산 (현재 페이지 기준 앞뒤 2개씩)
+    const startPage = Math.max(1, currentPage - 2);
+    const endPage = Math.min(totalPages, currentPage + 2);
+    
+    for (let i = startPage; i <= endPage; i++) {
+        pageNumbers.push(i);
+    }
+
+    const getPageUrl = (page: number) => {
+        if (page === 1) {
+            return category ? `/${lang}/blog?category=${category}` : `/${lang}/blog`;
+        }
+        return category
+            ? `/${lang}/blog?category=${category}&page=${page}`
+            : `/${lang}/blog?page=${page}`;
+    };
+
+    const texts = {
+        prev: lang === 'ko' ? '이전' : lang === 'jp' ? '前へ' : 'Previous',
+        next: lang === 'ko' ? '다음' : lang === 'jp' ? '次へ' : 'Next',
+    };
+
+    if (totalPages <= 1) return null;
+
+    return (
+        <nav className="flex items-center justify-center gap-2 mt-12">
+            {/* 이전 버튼 */}
+            {currentPage > 1 ? (
+                <Link
+                    href={getPageUrl(currentPage - 1)}
+                    className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors"
+                >
+                    {texts.prev}
+                </Link>
+            ) : (
+                <span className="px-4 py-2 border border-gray-300 rounded-md text-gray-400 cursor-not-allowed">
+                    {texts.prev}
+                </span>
+            )}
+
+            {/* 첫 페이지 */}
+            {startPage > 1 && (
+                <>
+                    <Link
+                        href={getPageUrl(1)}
+                        className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors"
+                    >
+                        1
+                    </Link>
+                    {startPage > 2 && (
+                        <span className="px-2 text-gray-500">...</span>
+                    )}
+                </>
+            )}
+
+            {/* 페이지 번호들 */}
+            {pageNumbers.map((page) => (
+                <Link
+                    key={page}
+                    href={getPageUrl(page)}
+                    className={`px-4 py-2 border rounded-md transition-colors ${
+                        page === currentPage
+                            ? 'bg-blue-600 text-white border-blue-600 font-medium'
+                            : 'border-gray-300 text-gray-700 hover:bg-gray-50'
+                    }`}
+                >
+                    {page}
+                </Link>
+            ))}
+
+            {/* 마지막 페이지 */}
+            {endPage < totalPages && (
+                <>
+                    {endPage < totalPages - 1 && (
+                        <span className="px-2 text-gray-500">...</span>
+                    )}
+                    <Link
+                        href={getPageUrl(totalPages)}
+                        className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors"
+                    >
+                        {totalPages}
+                    </Link>
+                </>
+            )}
+
+            {/* 다음 버튼 */}
+            {currentPage < totalPages ? (
+                <Link
+                    href={getPageUrl(currentPage + 1)}
+                    className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors"
+                >
+                    {texts.next}
+                </Link>
+            ) : (
+                <span className="px-4 py-2 border border-gray-300 rounded-md text-gray-400 cursor-not-allowed">
+                    {texts.next}
+                </span>
+            )}
+        </nav>
+    );
+}
+
 /**
  * 블로그 목록 페이지 컴포넌트
  */
@@ -39,17 +160,37 @@ export default async function BlogPage({
     searchParams,
 }: {
     params: Promise<{ lang: string }>;
-    searchParams: Promise<{ category?: string }>;
+    searchParams: Promise<{ category?: string; page?: string }>;
 }) {
     const { lang } = await params;
-    const { category: selectedCategory } = await searchParams;
+    const { category: selectedCategory, page } = await searchParams;
+
+    // 현재 페이지 번호 (기본값: 1)
+    let currentPage = page ? parseInt(page, 10) : 1;
+    if (isNaN(currentPage) || currentPage < 1) {
+        currentPage = 1;
+    }
 
     // 선택된 카테고리로 필터링
-    const posts = await getPosts({
+    const allPosts = await getPosts({
         lang,
         category: selectedCategory || undefined,
         sort: 'date-desc'
     });
+    
+    // 페이지네이션 계산
+    const totalPosts = allPosts.length;
+    const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE) || 1;
+    
+    // 잘못된 페이지 번호 처리
+    if (currentPage > totalPages) {
+        currentPage = totalPages;
+    }
+    
+    const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+    const endIndex = startIndex + POSTS_PER_PAGE;
+    const posts = allPosts.slice(startIndex, endIndex);
+    
     const categories = getCategories();
     const title = pageTitles[lang] || 'Blog';
 
@@ -61,7 +202,7 @@ export default async function BlogPage({
             {categories.length > 0 && (
                 <div className="mb-6">
                     <h2 className="text-lg font-semibold mb-2 text-gray-900">
-                        {lang === 'ko' ? '카테고리' : lang === 'ja' ? 'カテゴリー' : 'Categories'}
+                        {lang === 'ko' ? '카테고리' : lang === 'jp' ? 'カテゴリー' : 'Categories'}
                     </h2>
                     <div className="flex flex-wrap gap-2">
                         {/* 전체 보기 버튼 */}
@@ -72,7 +213,7 @@ export default async function BlogPage({
                                 : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
                                 }`}
                         >
-                            {lang === 'ko' ? '전체' : lang === 'ja' ? 'すべて' : 'All'}
+                            {lang === 'ko' ? '전체' : lang === 'jp' ? 'すべて' : 'All'}
                         </Link>
                         {/* 카테고리 버튼들 */}
                         {categories.map((category) => (
@@ -98,7 +239,7 @@ export default async function BlogPage({
                         ? selectedCategory
                             ? '이 카테고리에 포스트가 없습니다.'
                             : '아직 작성된 포스트가 없습니다.'
-                        : lang === 'ja'
+                        : lang === 'jp'
                             ? selectedCategory
                                 ? 'このカテゴリーに投稿がありません。'
                                 : 'まだ投稿がありません。'
@@ -124,7 +265,7 @@ export default async function BlogPage({
                                     {new Date(post.date).toLocaleDateString(
                                         lang === 'ko'
                                             ? 'ko-KR'
-                                            : lang === 'ja'
+                                            : lang === 'jp'
                                                 ? 'ja-JP'
                                                 : 'en-US',
                                         {
@@ -161,7 +302,7 @@ export default async function BlogPage({
                             >
                                 {lang === 'ko'
                                     ? '더 읽기 →'
-                                    : lang === 'ja'
+                                    : lang === 'jp'
                                         ? '続きを読む →'
                                         : 'Read more →'}
                             </Link>
@@ -169,6 +310,14 @@ export default async function BlogPage({
                     ))}
                 </div>
             )}
+
+            {/* 페이지네이션 */}
+            <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                lang={lang}
+                category={selectedCategory}
+            />
         </div>
     );
 }

@@ -18,7 +18,4 @@ body {
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
 
-/* 텍스트 색상 명시적으로 설정 */
-* {
-  color: inherit;
-}
+

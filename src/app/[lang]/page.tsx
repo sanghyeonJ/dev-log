@@ -10,20 +10,20 @@ import type { Metadata } from "next";
 // 언어별 텍스트
 const homeTexts: Record<string, { title: string; subtitle: string; viewBlog: string; latestPosts: string }> = {
     ko: {
-        title: "기술 블로그에 오신 것을 환영합니다",
-        subtitle: "프론트엔드 개발과 관련된 기술과 경험을 공유합니다",
+        title: "S의 스터디 일지에 오신 것을 환영합니다",
+        subtitle: "개발과 관련된 기술과 경험을 공유합니다",
         viewBlog: "블로그 보기",
         latestPosts: "최신 포스트",
     },
-    ja: {
-        title: "技術ブログへようこそ",
-        subtitle: "フロントエンド開発に関する技術と経験を共有します",
+    jp: {
+        title: "Sのスタディ日記へようこそ",
+        subtitle: "開発に関する技術と経験を共有します",
         viewBlog: "ブログを見る",
         latestPosts: "最新の投稿",
     },
     en: {
-        title: "Welcome to Tech Blog",
-        subtitle: "Sharing knowledge and experiences about frontend development",
+        title: "Welcome to S's Study Diary",
+        subtitle: "Sharing knowledge and experiences about development",
         viewBlog: "View Blog",
         latestPosts: "Latest Posts",
     },
@@ -101,8 +101,8 @@ export default async function HomePage({
                                                 {new Date(post.date).toLocaleDateString(
                                                     lang === "ko"
                                                         ? "ko-KR"
-                                                        : lang === "ja"
-                                                            ? "ja-JP"
+                                                        : lang === "jp"
+                                                            ? "jp-JP"
                                                             : "en-US"
                                                 )}
                                             </time>

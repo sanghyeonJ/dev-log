@@ -15,6 +15,62 @@ import type { Metadata } from 'next';
  */
 const mdxComponents = {
   // 예: 코드 블록 스타일링 등
+  h1: (props: any) => (
+    <h1 className="text-4xl font-bold mt-8 mb-6 text-gray-900" {...props} />
+  ),
+  h2: (props: any) => (
+    <h2 className="text-3xl font-bold mt-10 mb-4 text-gray-900" {...props} />
+  ),
+  h3: (props: any) => (
+    <h3 className="text-2xl font-semibold mt-8 mb-3 text-gray-800" {...props} />
+  ),
+
+  /* 본문 */
+  p: (props: any) => (
+    <p className="text-base leading-7 text-gray-700 mb-4" {...props} />
+  ),
+
+  /* 리스트 */
+  ul: (props: any) => (
+    <ul className="list-disc pl-6 mb-4 text-gray-700" {...props} />
+  ),
+  li: (props: any) => (
+    <li className="mb-1" {...props} />
+  ),
+
+  /* 링크 */
+  a: (props: any) => (
+    <a
+      className="text-blue-600 underline hover:text-blue-800"
+      target="_blank"
+      rel="noopener noreferrer"
+      {...props}
+    />
+  ),
+
+  /* 인라인 코드 */
+  code: (props: any) => (
+    <code
+      className="bg-gray-100 text-pink-600 px-1 py-0.5 rounded text-sm"
+      {...props}
+    />
+  ),
+
+  /* 코드 블록 */
+  pre: (props: any) => (
+    <pre
+      className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto mb-6"
+      {...props}
+    />
+  ),
+
+  /* 인용 */
+  blockquote: (props: any) => (
+    <blockquote
+      className="border-l-4 border-gray-300 pl-4 italic text-gray-600 my-6"
+      {...props}
+    />
+  ),
 };
 
 /**
@@ -107,7 +163,7 @@ export default async function BlogPostPage({
         ←{' '}
         {lang === 'ko'
           ? '블로그 목록으로'
-          : lang === 'ja'
+          : lang === 'jp'
             ? 'ブログ一覧へ'
             : 'Back to Blog'}
       </Link>
@@ -119,7 +175,7 @@ export default async function BlogPostPage({
         <div className="flex items-center gap-4 text-sm text-gray-600 mb-4">
           <time dateTime={post.date} className="text-gray-600">
             {new Date(post.date).toLocaleDateString(
-              lang === 'ko' ? 'ko-KR' : lang === 'ja' ? 'ja-JP' : 'en-US',
+              lang === 'ko' ? 'ko-KR' : lang === 'jp' ? 'jp-JP' : 'en-US',
               {
                 year: 'numeric',
                 month: 'long',
@@ -161,7 +217,7 @@ export default async function BlogPostPage({
           ←{' '}
           {lang === 'ko'
             ? '모든 포스트 보기'
-            : lang === 'ja'
+            : lang === 'jp'
               ? 'すべての投稿を見る'
               : 'View all posts'}
         </Link>

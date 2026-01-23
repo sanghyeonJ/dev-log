@@ -6,8 +6,6 @@ tags: ["Tailwind CSS", "CSS", "Styling"]
 description: "Efficient styling methods using Tailwind CSS utility classes"
 ---
 
-# Quick Styling with Tailwind CSS
-
 Tailwind CSS is a utility-first CSS framework that enables you to build fast and consistent UIs.
 
 ## What is Tailwind CSS?
@@ -33,12 +31,14 @@ Tailwind CSS uses pre-defined utility classes to style HTML elements directly. U
 Tailwind uses a mobile-first approach.
 
 ```jsx
-<div className="
+<div
+  className="
   text-sm          // Base (mobile)
   md:text-base     // Medium and up
   lg:text-lg       // Large screens
   xl:text-xl       // Extra large screens
-">
+"
+>
   Responsive text
 </div>
 ```
@@ -46,10 +46,12 @@ Tailwind uses a mobile-first approach.
 ## Dark Mode
 
 ```jsx
-<div className="
+<div
+  className="
   bg-white dark:bg-gray-800
   text-gray-900 dark:text-white
-">
+"
+>
   Dark mode support
 </div>
 ```
@@ -94,11 +96,8 @@ const Button = ({ children }) => (
 ```javascript
 // tailwind.config.js
 module.exports = {
-  plugins: [
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/typography'),
-  ],
-}
+  plugins: [require("@tailwindcss/forms"), require("@tailwindcss/typography")],
+};
 ```
 
 ## Conclusion

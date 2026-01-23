@@ -6,8 +6,6 @@ tags: ["Tailwind CSS", "CSS", "スタイリング"]
 description: "Tailwind CSSのユーティリティクラスを活用した効率的なスタイリング方法"
 ---
 
-# Tailwind CSSで素早くスタイリング
-
 Tailwind CSSは、ユーティリティファースト（utility-first）のCSSフレームワークで、迅速で一貫したUIを構築できます。
 
 ## Tailwind CSSとは？
@@ -33,12 +31,14 @@ Tailwind CSSは、事前に定義されたユーティリティクラスを使�
 Tailwindはモバイルファーストアプローチを使用します。
 
 ```jsx
-<div className="
+<div
+  className="
   text-sm          // 基本（モバイル）
   md:text-base     // 中サイズ以上
   lg:text-lg       // 大画面
   xl:text-xl       // 超大画面
-">
+"
+>
   レスポンシブテキスト
 </div>
 ```
@@ -46,10 +46,12 @@ Tailwindはモバイルファーストアプローチを使用します。
 ## ダークモード
 
 ```jsx
-<div className="
+<div
+  className="
   bg-white dark:bg-gray-800
   text-gray-900 dark:text-white
-">
+"
+>
   ダークモード対応
 </div>
 ```
@@ -94,11 +96,8 @@ const Button = ({ children }) => (
 ```javascript
 // tailwind.config.js
 module.exports = {
-  plugins: [
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/typography'),
-  ],
-}
+  plugins: [require("@tailwindcss/forms"), require("@tailwindcss/typography")],
+};
 ```
 
 ## 結論
