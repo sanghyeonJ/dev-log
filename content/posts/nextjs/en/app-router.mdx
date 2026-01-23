@@ -1,0 +1,105 @@
+---
+title: "Complete Guide to Next.js App Router"
+date: "2024-01-20"
+category: "nextjs"
+tags: ["Next.js", "App Router", "React"]
+description: "Understanding the core concepts and usage of Next.js 13+ App Router"
+---
+
+# Complete Guide to Next.js App Router
+
+Next.js App Router is a new routing system based on React Server Components. This guide covers the core concepts of App Router.
+
+## What is App Router?
+
+App Router is a new routing system based on the `app` directory. Unlike the Pages Router, it uses Server Components by default.
+
+## Key Features
+
+### 1. Server Components by Default
+
+```typescript
+// app/page.tsx
+// Server component by default
+export default async function Page() {
+  const data = await fetch('https://api.example.com/data');
+  const json = await data.json();
+  
+  return <div>{json.title}</div>;
+}
+```
+
+### 2. Dynamic Routing
+
+```typescript
+// app/blog/[slug]/page.tsx
+export default async function BlogPost({ params }: { params: { slug: string } }) {
+  const { slug } = await params;
+  // Use slug to fetch data
+  return <article>{slug}</article>;
+}
+```
+
+### 3. Nested Layouts
+
+```typescript
+// app/layout.tsx - Root layout
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>{children}</body>
+    </html>
+  );
+}
+
+// app/blog/layout.tsx - Blog layout
+export default function BlogLayout({ children }) {
+  return (
+    <div>
+      <nav>Blog Navigation</nav>
+      {children}
+    </div>
+  );
+}
+```
+
+## Data Fetching
+
+In App Router, you can fetch data directly from server components.
+
+```typescript
+async function getPosts() {
+  const res = await fetch('https://api.example.com/posts');
+  return res.json();
+}
+
+export default async function PostsPage() {
+  const posts = await getPosts();
+  
+  return (
+    <ul>
+      {posts.map(post => (
+        <li key={post.id}>{post.title}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+## Static Generation (SSG)
+
+You can generate static paths using `generateStaticParams`.
+
+```typescript
+export async function generateStaticParams() {
+  const posts = await getPosts();
+  
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+```
+
+## Conclusion
+
+App Router provides better performance and developer experience. By leveraging Server Components, you can reduce client bundle size and improve initial loading speed.

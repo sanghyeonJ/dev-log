@@ -1,0 +1,126 @@
+---
+title: "Complete Guide to TypeScript Type Safety"
+date: "2024-01-25"
+category: "typescript"
+tags: ["TypeScript", "Type Safety", "JavaScript"]
+description: "Writing safer code by leveraging TypeScript's type system"
+---
+
+# Complete Guide to TypeScript Type Safety
+
+TypeScript adds static types to JavaScript, allowing you to catch errors during development.
+
+## Importance of Types
+
+Type systems significantly improve code stability. By catching errors at compile time, you can reduce runtime errors.
+
+## Basic Types
+
+```typescript
+// Primitive types
+let name: string = "John Doe";
+let age: number = 30;
+let isActive: boolean = true;
+
+// Arrays
+let numbers: number[] = [1, 2, 3];
+let names: Array<string> = ["Alice", "Bob"];
+
+// Objects
+interface User {
+  name: string;
+  age: number;
+  email?: string; // Optional property
+}
+
+const user: User = {
+  name: "John Doe",
+  age: 30,
+};
+```
+
+## Union and Intersection Types
+
+```typescript
+// Union type (or)
+type Status = "pending" | "approved" | "rejected";
+
+function handleStatus(status: Status) {
+  switch (status) {
+    case "pending":
+      return "Pending";
+    case "approved":
+      return "Approved";
+    case "rejected":
+      return "Rejected";
+  }
+}
+
+// Intersection type (and)
+type Admin = User & {
+  permissions: string[];
+};
+```
+
+## Generics
+
+```typescript
+// Generic function
+function identity<T>(arg: T): T {
+  return arg;
+}
+
+const number = identity<number>(42);
+const text = identity<string>("Hello");
+
+// Generic interface
+interface Container<T> {
+  value: T;
+  getValue(): T;
+}
+
+const numberContainer: Container<number> = {
+  value: 100,
+  getValue() {
+    return this.value;
+  },
+};
+```
+
+## Type Guards
+
+```typescript
+function isString(value: unknown): value is string {
+  return typeof value === "string";
+}
+
+function processValue(value: unknown) {
+  if (isString(value)) {
+    // In this block, value is narrowed to string type
+    console.log(value.toUpperCase());
+  }
+}
+```
+
+## Utility Types
+
+```typescript
+interface User {
+  name: string;
+  age: number;
+  email: string;
+}
+
+// Partial: Make all properties optional
+type PartialUser = Partial<User>;
+
+// Pick: Select specific properties
+type UserName = Pick<User, "name" | "email">;
+
+// Omit: Exclude specific properties
+type UserWithoutEmail = Omit<User, "email">;
+```
+
+## Conclusion
+
+By properly leveraging TypeScript's type system, you can write safer and more maintainable code. Types help express code intent clearly and catch errors at compile time.

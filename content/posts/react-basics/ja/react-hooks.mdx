@@ -1,0 +1,74 @@
+---
+title: "React Hooks完全ガイド"
+date: "2024-01-15"
+category: "react-basics"
+tags: ["React", "Hooks", "JavaScript"]
+description: "React Hooksの基本概念から高度なパターンまで完全に理解する"
+---
+
+# React Hooks完全ガイド
+
+React Hooksは、関数コンポーネントで状態管理とライフサイクル機能を使用できるようにする強力な機能です。
+
+## useState
+
+最も基本的なHookで、コンポーネントの状態を管理します。
+
+```typescript
+import { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  
+  return (
+    <div>
+      <p>現在のカウント: {count}</p>
+      <button onClick={() => setCount(count + 1)}>増加</button>
+    </div>
+  );
+}
+```
+
+## useEffect
+
+コンポーネントの副作用（side effects）を処理します。
+
+```typescript
+import { useEffect, useState } from 'react';
+
+function DataFetcher() {
+  const [data, setData] = useState(null);
+  
+  useEffect(() => {
+    fetch('/api/data')
+      .then(res => res.json())
+      .then(setData);
+  }, []); // 空配列はマウント時に一度だけ実行
+  
+  return <div>{data ? JSON.stringify(data) : '読み込み中...'}</div>;
+}
+```
+
+## カスタムHooks
+
+ロジックを再利用可能な関数として抽出できます。
+
+```typescript
+function useLocalStorage(key: string, initialValue: string) {
+  const [value, setValue] = useState(() => {
+    const item = window.localStorage.getItem(key);
+    return item ? JSON.parse(item) : initialValue;
+  });
+  
+  const setStoredValue = (newValue: string) => {
+    setValue(newValue);
+    window.localStorage.setItem(key, JSON.stringify(newValue));
+  };
+  
+  return [value, setStoredValue];
+}
+```
+
+## 結論
+
+React Hooksは関数コンポーネントをより強力にする核心機能です。正しく使用すれば、コードの再利用性と可読性を大幅に向上させることができます。

@@ -1,0 +1,119 @@
+---
+title: "Gitワークフローベストプラクティス"
+date: "2024-02-05"
+category: "git"
+tags: ["Git", "バージョン管理", "ワークフロー"]
+description: "効率的なGitワークフローとコラボレーションのためのベストプラクティス"
+---
+
+# Gitワークフローベストプラクティス
+
+Gitは現代のソフトウェア開発において不可欠なバージョン管理ツールです。正しいワークフローを使用することで、チームコラボレーションがはるかにスムーズになります。
+
+## ブランチ戦略
+
+### Git Flow
+
+```bash
+# メインブランチ
+main          # プロダクションコード
+develop       # 開発ブランチ
+
+# 補助ブランチ
+feature/      # 新機能
+release/      # リリース準備
+hotfix/       # 緊急修正
+```
+
+### GitHub Flow (シンプルなプロジェクト用)
+
+```bash
+main          # 常にデプロイ可能な状態
+feature/      # 機能開発ブランチ
+```
+
+## コミットメッセージルール
+
+### Conventional Commits
+
+```
+feat: 新機能追加
+fix: バグ修正
+docs: ドキュメント修正
+style: コードフォーマット
+refactor: コードリファクタリング
+test: テスト追加
+chore: ビルド設定など
+```
+
+### 例
+
+```bash
+git commit -m "feat: ユーザー認証機能追加"
+git commit -m "fix: ログインエラー修正"
+git commit -m "docs: README更新"
+```
+
+## ブランチ作業フロー
+
+```bash
+# 1. 最新コードを取得
+git checkout main
+git pull origin main
+
+# 2. 新機能ブランチ作成
+git checkout -b feature/user-authentication
+
+# 3. 作業とコミット
+git add .
+git commit -m "feat: ログインフォーム実装"
+
+# 4. リモートリポジトリにプッシュ
+git push origin feature/user-authentication
+
+# 5. Pull Request作成
+```
+
+## Pull Requestの書き方
+
+良いPRは以下を含むべきです：
+
+1. **明確なタイトル**: 何を変更したか
+2. **説明**: なぜ変更したか、どのように変更したか
+3. **チェックリスト**: レビュアーが確認すべき事項
+4. **スクリーンショット**: UI変更がある場合
+
+## コンフリクト解決
+
+```bash
+# コンフリクト発生時
+git checkout feature/my-feature
+git merge main
+
+# コンフリクトファイル修正後
+git add .
+git commit -m "resolve: merge conflict解決"
+```
+
+## 便利なGitコマンド
+
+```bash
+# 変更内容確認
+git status
+git diff
+
+# コミット履歴
+git log --oneline --graph
+
+# ブランチ管理
+git branch -a
+git branch -d feature/old-feature
+
+# 変更内容の取り消し
+git reset --soft HEAD~1
+git revert <commit-hash>
+```
+
+## 結論
+
+一貫したGitワークフローを使用することで、チームコラボレーションが円滑になり、コード品質が向上します。プロジェクト規模に適したブランチ戦略を選択し、明確なコミットメッセージを書くことが重要です。

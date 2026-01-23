@@ -1,0 +1,106 @@
+---
+title: "Tailwind CSS로 빠르게 스타일링하기"
+date: "2024-02-01"
+category: "css"
+tags: ["Tailwind CSS", "CSS", "스타일링"]
+description: "Tailwind CSS의 유틸리티 클래스를 활용한 효율적인 스타일링 방법"
+---
+
+# Tailwind CSS로 빠르게 스타일링하기
+
+Tailwind CSS는 유틸리티 우선(utility-first) CSS 프레임워크로, 빠르고 일관된 UI를 구축할 수 있게 해줍니다.
+
+## Tailwind CSS란?
+
+Tailwind CSS는 미리 정의된 유틸리티 클래스를 사용하여 HTML 요소를 직접 스타일링하는 방식입니다. 전통적인 CSS와 달리 별도의 CSS 파일을 작성할 필요가 없습니다.
+
+## 기본 사용법
+
+```jsx
+// 전통적인 CSS 방식
+<div className="container">
+  <h1 className="title">제목</h1>
+</div>
+
+// Tailwind CSS 방식
+<div className="container mx-auto px-4">
+  <h1 className="text-3xl font-bold text-gray-900">제목</h1>
+</div>
+```
+
+## 반응형 디자인
+
+Tailwind는 모바일 우선 접근 방식을 사용합니다.
+
+```jsx
+<div className="
+  text-sm          // 기본 (모바일)
+  md:text-base     // 중간 크기 이상
+  lg:text-lg       // 큰 화면
+  xl:text-xl       // 매우 큰 화면
+">
+  반응형 텍스트
+</div>
+```
+
+## 다크 모드
+
+```jsx
+<div className="
+  bg-white dark:bg-gray-800
+  text-gray-900 dark:text-white
+">
+  다크 모드 지원
+</div>
+```
+
+## 커스텀 클래스 조합
+
+```jsx
+// @apply 디렉티브 사용
+.btn-primary {
+  @apply px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700;
+}
+
+// 또는 컴포넌트에서 직접
+const Button = ({ children }) => (
+  <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+    {children}
+  </button>
+);
+```
+
+## 유용한 유틸리티 클래스
+
+```jsx
+// 레이아웃
+<div className="flex items-center justify-between">
+<div className="grid grid-cols-3 gap-4">
+<div className="container mx-auto px-4">
+
+// 간격
+<div className="p-4 m-2 space-y-4">
+
+// 색상
+<div className="bg-blue-500 text-white border-2 border-gray-300">
+
+// 타이포그래피
+<h1 className="text-4xl font-bold text-center">
+<p className="text-gray-600 leading-relaxed">
+```
+
+## 플러그인 활용
+
+```javascript
+// tailwind.config.js
+module.exports = {
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/typography'),
+  ],
+}
+```
+
+## 결론
+
+Tailwind CSS는 빠른 프로토타이핑과 일관된 디자인 시스템 구축에 매우 유용합니다. 유틸리티 클래스를 통해 CSS 파일 없이도 빠르게 스타일링할 수 있습니다.

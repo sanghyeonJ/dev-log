@@ -1,0 +1,126 @@
+---
+title: "TypeScript型安全性完全ガイド"
+date: "2024-01-25"
+category: "typescript"
+tags: ["TypeScript", "型安全性", "JavaScript"]
+description: "TypeScriptの型システムを活用してより安全なコードを書く"
+---
+
+# TypeScript型安全性完全ガイド
+
+TypeScriptは、JavaScriptに静的型を追加することで、開発時にエラーを事前に発見できるようにします。
+
+## 型の重要性
+
+型システムはコードの安定性を大幅に向上させます。コンパイル時にエラーを発見できるため、ランタイムエラーを減らすことができます。
+
+## 基本型
+
+```typescript
+// プリミティブ型
+let name: string = "山田太郎";
+let age: number = 30;
+let isActive: boolean = true;
+
+// 配列
+let numbers: number[] = [1, 2, 3];
+let names: Array<string> = ["佐藤", "鈴木"];
+
+// オブジェクト
+interface User {
+  name: string;
+  age: number;
+  email?: string; // オプショナルプロパティ
+}
+
+const user: User = {
+  name: "山田太郎",
+  age: 30,
+};
+```
+
+## ユニオン型とインターセクション型
+
+```typescript
+// ユニオン型（または）
+type Status = "pending" | "approved" | "rejected";
+
+function handleStatus(status: Status) {
+  switch (status) {
+    case "pending":
+      return "保留中";
+    case "approved":
+      return "承認済み";
+    case "rejected":
+      return "拒否";
+  }
+}
+
+// インターセクション型（そして）
+type Admin = User & {
+  permissions: string[];
+};
+```
+
+## ジェネリック
+
+```typescript
+// ジェネリック関数
+function identity<T>(arg: T): T {
+  return arg;
+}
+
+const number = identity<number>(42);
+const text = identity<string>("Hello");
+
+// ジェネリックインターフェース
+interface Container<T> {
+  value: T;
+  getValue(): T;
+}
+
+const numberContainer: Container<number> = {
+  value: 100,
+  getValue() {
+    return this.value;
+  },
+};
+```
+
+## 型ガード
+
+```typescript
+function isString(value: unknown): value is string {
+  return typeof value === "string";
+}
+
+function processValue(value: unknown) {
+  if (isString(value)) {
+    // このブロックでvalueはstring型に絞り込まれる
+    console.log(value.toUpperCase());
+  }
+}
+```
+
+## ユーティリティ型
+
+```typescript
+interface User {
+  name: string;
+  age: number;
+  email: string;
+}
+
+// Partial: すべてのプロパティをオプショナルに
+type PartialUser = Partial<User>;
+
+// Pick: 特定のプロパティのみ選択
+type UserName = Pick<User, "name" | "email">;
+
+// Omit: 特定のプロパティを除外
+type UserWithoutEmail = Omit<User, "email">;
+```
+
+## 結論
+
+TypeScriptの型システムを適切に活用することで、より安全で保守しやすいコードを書くことができます。型を通じてコードの意図を明確に表現し、コンパイル時にエラーを発見できます。

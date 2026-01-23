@@ -1,0 +1,119 @@
+---
+title: "Git 워크플로우 베스트 프랙티스"
+date: "2024-02-05"
+category: "git"
+tags: ["Git", "버전 관리", "워크플로우"]
+description: "효율적인 Git 워크플로우와 협업을 위한 베스트 프랙티스"
+---
+
+# Git 워크플로우 베스트 프랙티스
+
+Git은 현대 소프트웨어 개발에서 필수적인 버전 관리 도구입니다. 올바른 워크플로우를 사용하면 팀 협업이 훨씬 수월해집니다.
+
+## 브랜치 전략
+
+### Git Flow
+
+```bash
+# 메인 브랜치
+main          # 프로덕션 코드
+develop       # 개발 브랜치
+
+# 보조 브랜치
+feature/      # 새로운 기능
+release/      # 릴리스 준비
+hotfix/       # 긴급 수정
+```
+
+### GitHub Flow (간단한 프로젝트용)
+
+```bash
+main          # 항상 배포 가능한 상태
+feature/      # 기능 개발 브랜치
+```
+
+## 커밋 메시지 규칙
+
+### Conventional Commits
+
+```
+feat: 새로운 기능 추가
+fix: 버그 수정
+docs: 문서 수정
+style: 코드 포맷팅
+refactor: 코드 리팩토링
+test: 테스트 추가
+chore: 빌드 설정 등
+```
+
+### 예시
+
+```bash
+git commit -m "feat: 사용자 인증 기능 추가"
+git commit -m "fix: 로그인 오류 수정"
+git commit -m "docs: README 업데이트"
+```
+
+## 브랜치 작업 흐름
+
+```bash
+# 1. 최신 코드 가져오기
+git checkout main
+git pull origin main
+
+# 2. 새 기능 브랜치 생성
+git checkout -b feature/user-authentication
+
+# 3. 작업 및 커밋
+git add .
+git commit -m "feat: 로그인 폼 구현"
+
+# 4. 원격 저장소에 푸시
+git push origin feature/user-authentication
+
+# 5. Pull Request 생성
+```
+
+## Pull Request 작성법
+
+좋은 PR은 다음을 포함해야 합니다:
+
+1. **명확한 제목**: 무엇을 변경했는지
+2. **설명**: 왜 변경했는지, 어떻게 변경했는지
+3. **체크리스트**: 리뷰어가 확인할 사항
+4. **스크린샷**: UI 변경이 있는 경우
+
+## 충돌 해결
+
+```bash
+# 충돌 발생 시
+git checkout feature/my-feature
+git merge main
+
+# 충돌 파일 수정 후
+git add .
+git commit -m "resolve: merge conflict 해결"
+```
+
+## 유용한 Git 명령어
+
+```bash
+# 변경사항 확인
+git status
+git diff
+
+# 커밋 히스토리
+git log --oneline --graph
+
+# 브랜치 관리
+git branch -a
+git branch -d feature/old-feature
+
+# 변경사항 되돌리기
+git reset --soft HEAD~1
+git revert <commit-hash>
+```
+
+## 결론
+
+일관된 Git 워크플로우를 사용하면 팀 협업이 원활해지고, 코드 품질이 향상됩니다. 프로젝트 규모에 맞는 브랜치 전략을 선택하고, 명확한 커밋 메시지를 작성하는 것이 중요합니다.

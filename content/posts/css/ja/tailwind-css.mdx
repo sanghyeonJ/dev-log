@@ -1,0 +1,106 @@
+---
+title: "Tailwind CSSで素早くスタイリング"
+date: "2024-02-01"
+category: "css"
+tags: ["Tailwind CSS", "CSS", "スタイリング"]
+description: "Tailwind CSSのユーティリティクラスを活用した効率的なスタイリング方法"
+---
+
+# Tailwind CSSで素早くスタイリング
+
+Tailwind CSSは、ユーティリティファースト（utility-first）のCSSフレームワークで、迅速で一貫したUIを構築できます。
+
+## Tailwind CSSとは？
+
+Tailwind CSSは、事前に定義されたユーティリティクラスを使用してHTML要素を直接スタイリングする方法です。従来のCSSとは異なり、別のCSSファイルを書く必要がありません。
+
+## 基本的な使い方
+
+```jsx
+// 従来のCSS方式
+<div className="container">
+  <h1 className="title">タイトル</h1>
+</div>
+
+// Tailwind CSS方式
+<div className="container mx-auto px-4">
+  <h1 className="text-3xl font-bold text-gray-900">タイトル</h1>
+</div>
+```
+
+## レスポンシブデザイン
+
+Tailwindはモバイルファーストアプローチを使用します。
+
+```jsx
+<div className="
+  text-sm          // 基本（モバイル）
+  md:text-base     // 中サイズ以上
+  lg:text-lg       // 大画面
+  xl:text-xl       // 超大画面
+">
+  レスポンシブテキスト
+</div>
+```
+
+## ダークモード
+
+```jsx
+<div className="
+  bg-white dark:bg-gray-800
+  text-gray-900 dark:text-white
+">
+  ダークモード対応
+</div>
+```
+
+## カスタムクラスの組み合わせ
+
+```jsx
+// @applyディレクティブを使用
+.btn-primary {
+  @apply px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700;
+}
+
+// またはコンポーネントで直接
+const Button = ({ children }) => (
+  <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+    {children}
+  </button>
+);
+```
+
+## 便利なユーティリティクラス
+
+```jsx
+// レイアウト
+<div className="flex items-center justify-between">
+<div className="grid grid-cols-3 gap-4">
+<div className="container mx-auto px-4">
+
+// 間隔
+<div className="p-4 m-2 space-y-4">
+
+// 色
+<div className="bg-blue-500 text-white border-2 border-gray-300">
+
+// タイポグラフィ
+<h1 className="text-4xl font-bold text-center">
+<p className="text-gray-600 leading-relaxed">
+```
+
+## プラグインの活用
+
+```javascript
+// tailwind.config.js
+module.exports = {
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/typography'),
+  ],
+}
+```
+
+## 結論
+
+Tailwind CSSは、迅速なプロトタイピングと一貫したデザインシステムの構築に非常に有用です。ユーティリティクラスを通じて、CSSファイルなしで素早くスタイリングできます。

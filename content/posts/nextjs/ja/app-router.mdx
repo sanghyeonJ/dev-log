@@ -1,0 +1,105 @@
+---
+title: "Next.js App Router完全ガイド"
+date: "2024-01-20"
+category: "nextjs"
+tags: ["Next.js", "App Router", "React"]
+description: "Next.js 13+ App Routerの核心概念と使い方を完全に理解する"
+---
+
+# Next.js App Router完全ガイド
+
+Next.js App Routerは、React Server Componentsを基盤とした新しいルーティングシステムです。このガイドでは、App Routerの核心概念を扱います。
+
+## App Routerとは？
+
+App Routerは`app`ディレクトリを基盤とする新しいルーティングシステムです。従来のPages Routerとは異なり、サーバーコンポーネントをデフォルトで使用します。
+
+## 主な特徴
+
+### 1. サーバーコンポーネントデフォルト
+
+```typescript
+// app/page.tsx
+// デフォルトでサーバーコンポーネントです
+export default async function Page() {
+  const data = await fetch('https://api.example.com/data');
+  const json = await data.json();
+  
+  return <div>{json.title}</div>;
+}
+```
+
+### 2. 動的ルーティング
+
+```typescript
+// app/blog/[slug]/page.tsx
+export default async function BlogPost({ params }: { params: { slug: string } }) {
+  const { slug } = await params;
+  // slugを使用してデータを取得
+  return <article>{slug}</article>;
+}
+```
+
+### 3. レイアウトのネスト
+
+```typescript
+// app/layout.tsx - ルートレイアウト
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>{children}</body>
+    </html>
+  );
+}
+
+// app/blog/layout.tsx - ブログレイアウト
+export default function BlogLayout({ children }) {
+  return (
+    <div>
+      <nav>ブログナビゲーション</nav>
+      {children}
+    </div>
+  );
+}
+```
+
+## データフェッチング
+
+App Routerでは、サーバーコンポーネントから直接データを取得できます。
+
+```typescript
+async function getPosts() {
+  const res = await fetch('https://api.example.com/posts');
+  return res.json();
+}
+
+export default async function PostsPage() {
+  const posts = await getPosts();
+  
+  return (
+    <ul>
+      {posts.map(post => (
+        <li key={post.id}>{post.title}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+## 静的生成 (SSG)
+
+`generateStaticParams`を使用して静的パスを生成できます。
+
+```typescript
+export async function generateStaticParams() {
+  const posts = await getPosts();
+  
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+```
+
+## 結論
+
+App Routerは、より優れたパフォーマンスと開発者体験を提供します。サーバーコンポーネントを活用することで、クライアントバンドルサイズを削減し、初期読み込み速度を改善できます。

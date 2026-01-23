@@ -1,0 +1,105 @@
+---
+title: "Next.js App Router 완벽 가이드"
+date: "2024-01-20"
+category: "nextjs"
+tags: ["Next.js", "App Router", "React"]
+description: "Next.js 13+ App Router의 핵심 개념과 사용법을 완벽하게 이해하기"
+---
+
+# Next.js App Router 완벽 가이드
+
+Next.js App Router는 React Server Components를 기반으로 한 새로운 라우팅 시스템입니다. 이 가이드에서는 App Router의 핵심 개념을 다룹니다.
+
+## App Router란?
+
+App Router는 `app` 디렉토리를 기반으로 하는 새로운 라우팅 시스템입니다. 기존 Pages Router와 달리 서버 컴포넌트를 기본으로 사용합니다.
+
+## 주요 특징
+
+### 1. 서버 컴포넌트 기본
+
+```typescript
+// app/page.tsx
+// 기본적으로 서버 컴포넌트입니다
+export default async function Page() {
+  const data = await fetch('https://api.example.com/data');
+  const json = await data.json();
+  
+  return <div>{json.title}</div>;
+}
+```
+
+### 2. 동적 라우팅
+
+```typescript
+// app/blog/[slug]/page.tsx
+export default async function BlogPost({ params }: { params: { slug: string } }) {
+  const { slug } = await params;
+  // slug를 사용하여 데이터 가져오기
+  return <article>{slug}</article>;
+}
+```
+
+### 3. 레이아웃 중첩
+
+```typescript
+// app/layout.tsx - 루트 레이아웃
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>{children}</body>
+    </html>
+  );
+}
+
+// app/blog/layout.tsx - 블로그 레이아웃
+export default function BlogLayout({ children }) {
+  return (
+    <div>
+      <nav>블로그 네비게이션</nav>
+      {children}
+    </div>
+  );
+}
+```
+
+## 데이터 페칭
+
+App Router에서는 서버 컴포넌트에서 직접 데이터를 가져올 수 있습니다.
+
+```typescript
+async function getPosts() {
+  const res = await fetch('https://api.example.com/posts');
+  return res.json();
+}
+
+export default async function PostsPage() {
+  const posts = await getPosts();
+  
+  return (
+    <ul>
+      {posts.map(post => (
+        <li key={post.id}>{post.title}</li>
+      ))}
+    </ul>
+  );
+}
+```
+
+## 정적 생성 (SSG)
+
+`generateStaticParams`를 사용하여 정적 경로를 생성할 수 있습니다.
+
+```typescript
+export async function generateStaticParams() {
+  const posts = await getPosts();
+  
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
+}
+```
+
+## 결론
+
+App Router는 더 나은 성능과 개발자 경험을 제공합니다. 서버 컴포넌트를 활용하면 클라이언트 번들 크기를 줄이고 초기 로딩 속도를 개선할 수 있습니다.

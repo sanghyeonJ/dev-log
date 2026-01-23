@@ -1,0 +1,119 @@
+---
+title: "Git Workflow Best Practices"
+date: "2024-02-05"
+category: "git"
+tags: ["Git", "Version Control", "Workflow"]
+description: "Best practices for efficient Git workflows and collaboration"
+---
+
+# Git Workflow Best Practices
+
+Git is an essential version control tool in modern software development. Using the right workflow makes team collaboration much smoother.
+
+## Branch Strategy
+
+### Git Flow
+
+```bash
+# Main branches
+main          # Production code
+develop       # Development branch
+
+# Supporting branches
+feature/      # New features
+release/      # Release preparation
+hotfix/       # Emergency fixes
+```
+
+### GitHub Flow (for simple projects)
+
+```bash
+main          # Always deployable
+feature/      # Feature development branch
+```
+
+## Commit Message Rules
+
+### Conventional Commits
+
+```
+feat: Add new feature
+fix: Bug fix
+docs: Documentation changes
+style: Code formatting
+refactor: Code refactoring
+test: Add tests
+chore: Build configuration, etc.
+```
+
+### Examples
+
+```bash
+git commit -m "feat: Add user authentication"
+git commit -m "fix: Fix login error"
+git commit -m "docs: Update README"
+```
+
+## Branch Workflow
+
+```bash
+# 1. Get latest code
+git checkout main
+git pull origin main
+
+# 2. Create new feature branch
+git checkout -b feature/user-authentication
+
+# 3. Work and commit
+git add .
+git commit -m "feat: Implement login form"
+
+# 4. Push to remote repository
+git push origin feature/user-authentication
+
+# 5. Create Pull Request
+```
+
+## Writing Pull Requests
+
+A good PR should include:
+
+1. **Clear title**: What was changed
+2. **Description**: Why and how it was changed
+3. **Checklist**: Items for reviewers to check
+4. **Screenshots**: If there are UI changes
+
+## Resolving Conflicts
+
+```bash
+# When conflict occurs
+git checkout feature/my-feature
+git merge main
+
+# After fixing conflict files
+git add .
+git commit -m "resolve: Fix merge conflict"
+```
+
+## Useful Git Commands
+
+```bash
+# Check changes
+git status
+git diff
+
+# Commit history
+git log --oneline --graph
+
+# Branch management
+git branch -a
+git branch -d feature/old-feature
+
+# Undo changes
+git reset --soft HEAD~1
+git revert <commit-hash>
+```
+
+## Conclusion
+
+Using a consistent Git workflow makes team collaboration smoother and improves code quality. It's important to choose a branch strategy that fits your project size and write clear commit messages.

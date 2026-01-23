@@ -1,0 +1,74 @@
+---
+title: "React Hooks 완전 정리"
+date: "2024-01-15"
+category: "react-basics"
+tags: ["React", "Hooks", "JavaScript"]
+description: "React Hooks의 기본 개념부터 고급 패턴까지 완벽하게 이해하기"
+---
+
+# React Hooks 완전 정리
+
+React Hooks는 함수형 컴포넌트에서 상태 관리와 생명주기 기능을 사용할 수 있게 해주는 강력한 기능입니다.
+
+## useState
+
+가장 기본적인 Hook으로, 컴포넌트의 상태를 관리합니다.
+
+```typescript
+import { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  
+  return (
+    <div>
+      <p>현재 카운트: {count}</p>
+      <button onClick={() => setCount(count + 1)}>증가</button>
+    </div>
+  );
+}
+```
+
+## useEffect
+
+컴포넌트의 부수 효과(side effects)를 처리합니다.
+
+```typescript
+import { useEffect, useState } from 'react';
+
+function DataFetcher() {
+  const [data, setData] = useState(null);
+  
+  useEffect(() => {
+    fetch('/api/data')
+      .then(res => res.json())
+      .then(setData);
+  }, []); // 빈 배열은 마운트 시 한 번만 실행
+  
+  return <div>{data ? JSON.stringify(data) : '로딩 중...'}</div>;
+}
+```
+
+## 커스텀 Hooks
+
+로직을 재사용 가능한 함수로 추출할 수 있습니다.
+
+```typescript
+function useLocalStorage(key: string, initialValue: string) {
+  const [value, setValue] = useState(() => {
+    const item = window.localStorage.getItem(key);
+    return item ? JSON.parse(item) : initialValue;
+  });
+  
+  const setStoredValue = (newValue: string) => {
+    setValue(newValue);
+    window.localStorage.setItem(key, JSON.stringify(newValue));
+  };
+  
+  return [value, setStoredValue];
+}
+```
+
+## 결론
+
+React Hooks는 함수형 컴포넌트를 더욱 강력하게 만들어주는 핵심 기능입니다. 올바르게 사용하면 코드의 재사용성과 가독성을 크게 향상시킬 수 있습니다.

@@ -1,0 +1,74 @@
+---
+title: "Complete Guide to React Hooks"
+date: "2024-01-15"
+category: "react-basics"
+tags: ["React", "Hooks", "JavaScript"]
+description: "Understanding React Hooks from basic concepts to advanced patterns"
+---
+
+# Complete Guide to React Hooks
+
+React Hooks are powerful features that allow you to use state and lifecycle features in function components.
+
+## useState
+
+The most basic Hook for managing component state.
+
+```typescript
+import { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  
+  return (
+    <div>
+      <p>Current count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+}
+```
+
+## useEffect
+
+Handles side effects in components.
+
+```typescript
+import { useEffect, useState } from 'react';
+
+function DataFetcher() {
+  const [data, setData] = useState(null);
+  
+  useEffect(() => {
+    fetch('/api/data')
+      .then(res => res.json())
+      .then(setData);
+  }, []); // Empty array runs only once on mount
+  
+  return <div>{data ? JSON.stringify(data) : 'Loading...'}</div>;
+}
+```
+
+## Custom Hooks
+
+Extract logic into reusable functions.
+
+```typescript
+function useLocalStorage(key: string, initialValue: string) {
+  const [value, setValue] = useState(() => {
+    const item = window.localStorage.getItem(key);
+    return item ? JSON.parse(item) : initialValue;
+  });
+  
+  const setStoredValue = (newValue: string) => {
+    setValue(newValue);
+    window.localStorage.setItem(key, JSON.stringify(newValue));
+  };
+  
+  return [value, setStoredValue];
+}
+```
+
+## Conclusion
+
+React Hooks are core features that make function components more powerful. When used correctly, they can significantly improve code reusability and readability.
