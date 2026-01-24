@@ -1,0 +1,52 @@
+---
+title: "What is Java?"
+date: "2026-01-24"
+category: "java"
+tags: ["java", "basics", "programming"]
+description: "Java standard specification, compilation process, JVM, and the concept of OS independence"
+---
+
+### Java Standard Specification
+
+#### Java Standard Specification and Implementation
+
+Java can be divided into **standard specification** and **implementation**.
+
+##### `Java Standard Specification`
+    - It is a blueprint and document that defines how Java should be made.
+    - Based on this standard specification, various companies create working implementations of Java.
+    - The Java standard specification is managed through the Java Community Process (JCP).
+##### `Various Java Implementations`
+    - Various companies develop working Java programs that conform to the Java standard specification.
+    - Each has its own advantages and disadvantages. For example, Amazon Corretto is optimized for AWS.
+    - Most companies also provide versions of Java that work on various operating systems such as Windows, MAC, and Linux.
+
+#### Ease of Change
+
+All Java implementations are developed to conform to the standard specification. Therefore, you can switch from Oracle Open JDK to Amazon Corretto Java without any major issues.
+
+
+### Compilation and Execution
+
+Java programs go through compilation and execution stages.
+- Developers write Java source code such as `Hello.java`.
+- Compile the source code using a Java compiler.
+    - Use a program called `javac` provided by Java.
+    - `.class` files are generated from `.java` files.
+    - Converts Java source code to bytecode, optimizes it for faster execution on the Java Virtual Machine, and detects syntax errors.
+- Execute the Java program.
+    - Use a program called `java` provided by Java.
+    - The program runs as the Java Virtual Machine (JVM) executes.
+
+### Java Programs
+
+- Java programs can run on any OS where Java is installed.
+- Java developers don't need to develop for a specific OS. Java developers just need to develop for Java. Java handles OS compatibility issues. Compiled Java files like `Hello.class` can run in any Java environment.
+- Windows Java is composed of commands used by the Windows OS. MAC or Linux Java are also composed of commands used by their respective OSes. Developers only need to install Java according to each OS.
+
+#### Java Development and Production Environment
+
+- You can use different Java versions for development and for running on servers.
+- Developers mainly use Windows or MAC OS for development convenience.
+- Servers mainly use Linux. If you use AWS, you can install Amazon Corretto Java on AWS Linux servers.
+- Thanks to Java's OS independence, it's possible to install Java according to each environment.

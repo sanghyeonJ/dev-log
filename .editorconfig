@@ -1,0 +1,15 @@
+# EditorConfig 설정
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.mdx]
+# MDX 파일은 포맷팅하지 않음
+indent_style = unset
+indent_size = unset
+trim_trailing_whitespace = false
+insert_final_newline = unset

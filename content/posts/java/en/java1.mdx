@@ -1,0 +1,99 @@
+---
+title: "Running a Java Program"
+date: "2026-01-23"
+category: "java"
+tags: ["java", "basics", "programming"]
+description: "Basic structure and execution process of Java programs"
+---
+
+### Hello java
+
+```java
+public class HelloJava {
+    public static void main(String[] args) {
+        System.out.println("hello java");
+    }
+}
+```
+
+##### Note
+
+Java is case-sensitive. Different cases may cause errors.
+
+### Execution Result
+
+```bash
+hello java
+```
+
+##### public class HelloJava
+
+- `HelloJava` is called a class. You need to learn the concept of classes to understand this.
+- For now, simply understand that we created a file called `HelloJava.java`.
+- The filename and class name must be the same.
+- Use `{}` blocks to indicate the start and end of a class.
+
+##### public static void main(String[] args)
+
+- This is called the `main` method. You need to learn the concepts of functions and methods to understand this. Functions and methods will be covered later.
+- Java finds the `main(String[] args)` method and starts the program.
+- For now, simply understand that `main` is the entry point of the program.
+- Use `{}` blocks to indicate the start and end of a method.
+
+##### System.out.println("hello java");
+
+- `System.out.println()` : A function that outputs values to the console.
+- `"hello java"` : Java uses `"` (double quotes) when working with strings. Simply wrap your desired string between double quotes.
+- `;` : Java uses semicolons to separate statements. You must include a semicolon at the end of every statement.
+
+### Execution Process
+
+1. Execute the `HelloJava` program.
+2. Java executes the `main()` method, which is the entry point.
+3. When it encounters `System.out.println("hello java")`, it outputs the string `hello java`.
+4. When the `{}` block of the `main()` method ends, the program terminates.
+
+### Block Example
+
+```java
+public class HelloJava {                      //Start of HelloJava class scope
+    public static void main(String[] args) {  //Start of main() method scope
+        System.out.println("hello java");
+    }                                         //End of main() method scope
+}                                             //End of HelloJava class scope
+```
+
+- You can see that indentation is applied whenever a block (`{}`) starts and ends. This is a good convention that helps distinguish and understand code easily. Each time blocks are nested, the indentation depth increases.
+- Indentation typically uses 4 spaces. Note that in IntelliJ IDE, pressing the `Tab` key once automatically applies 4 spaces.
+- Note that the program will work even without indentation. However, it makes the code harder to read.
+
+## Summary
+
+Here's a summary of the basic structure and execution process of Java programs:
+
+#### Basic Structure of Java Programs
+
+- **Class**: `public class HelloJava` - The filename and class name must be the same
+- **Method**: `public static void main(String[] args)` - The entry point of the program
+- **Block**: `{}` - Indicates the scope of classes and methods
+- **Statement Separator**: `;` (semicolon) - Required at the end of every statement
+
+#### Key Concepts
+
+- **Output**: `System.out.println()` - Function to output values to the console
+- **String**: `"string"` - Expressed by wrapping text in double quotes
+- **Indentation**: Improves code readability as blocks are nested (typically 4 spaces)
+
+#### Execution Flow
+
+1. Program execution
+2. Find `main()` method
+3. Execute code inside the method
+4. Terminate when block ends
+
+#### Important Notes
+
+- Java is **case-sensitive**
+- The filename and class name **must be the same**
+- You must add a **semicolon(`;`)** at the end of every statement
+- Indentation is not required but **recommended for code readability**

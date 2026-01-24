@@ -1,0 +1,46 @@
+---
+title: "コメント"
+date: "2026-01-24"
+category: "java"
+tags: ["java", "基礎", "プログラミング"]
+description: "コード説明と一時的な無効化のためのJavaコメントの使い方"
+---
+
+### コメント(comment)
+
+ソースコードが複雑な場合、ソースコードの理解を助けるために説明を書き残したいことがあります。
+または特定のコードを削除せずに、一時的に実行を止めておきたい場合もあります。
+このような場合にコメントを使用します。Javaはコメントがある場所を無視します。
+
+##### コメントの種類
+- 一行コメント (single line comment)
+    - `//`記号で始まります。この記号以降のすべてのテキストはコメントとして処理されます。
+- 複数行コメント(multi line comment)
+    - `/*`で始まり`*/`で終わります。この間のすべてのテキストはコメントとして処理されます。
+
+### CommentJava
+
+```java
+public class CommentJava {
+    /*
+    コメントを説明する部分です。
+    */
+    public static void main(String[] args) {
+        System.out.println("hello java1"); //hello java1を出力します。 (一行コメント - 部分適用)
+        //System.out.println("hello java2"); 一行コメント - ライン全体適用
+        /* 複数行コメント
+        System.out.println("hello java3");
+        System.out.println("hello java4");
+        */
+    }
+}
+```
+
+### 実行結果
+
+```bash
+hello java1
+```
+
+- コメントとして処理したコードが実行されなかったことを確認できます。
+- コメントは簡単に言うと、Javaプログラムが読まずに無視する部分です。人が読むために使用します。

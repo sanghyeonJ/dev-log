@@ -1,0 +1,163 @@
+---
+title: "Packages and Variables"
+date: "2026-01-24"
+category: "java"
+tags: ["java", "basics", "programming"]
+description: ""
+---
+
+### Packages
+
+##### Var1
+
+```java
+package variable;
+
+public class Var1 {
+    public static void main(String[] args) {
+        System.out.println(10);
+        System.out.println(10);
+        System.out.println(10);
+    }
+}
+```
+
+- You can think of packages as folders used to organize Java files.
+- If you create a package called `variable`, you must declare the package to which the Java file belongs, such as `package variable;`, on the first line of Java files that belong to that package.
+- The package where the Java file is located and the `package variable` declaration location must match.
+
+#### Execution Result
+
+```bash
+10
+10
+10
+```
+
+This is code that simply outputs the number 10 three times. Now let's modify the code to output the number 20 three times instead of outputting 10 three times.
+
+```java
+package variable;
+
+public class Var1 {
+    public static void main(String[] args) {
+        System.out.println(20);  //Changed 10 -> 20
+        System.out.println(20);  //Changed 10 -> 20
+        System.out.println(20);  //Changed 10 -> 20
+    }
+}
+```
+
+You need to find all places where the number 10 is written and change them to 20. In this case, a total of 3 code changes occurred.
+Since it's a simple example, we only changed the code 3 times, but if there were 100 places outputting the number 10, we would need to change all 100 pieces of code.
+
+Furthermore, what if we want users to input a number and output the number they entered? The value entered by users always changes. Someone might enter 100, and someone else might enter 200. (User input will be covered later)
+Ultimately, we need a storage space where we can store values somewhere and retrieve them when needed. Simply put, we need a container that can hold data.
+
+All programming languages provide a feature called **variables** to solve this problem. Variables, as the name suggests, can change.
+
+#### Var2
+
+```java
+package variable;
+
+public class Var2 {
+    public static void main(String[] args) {
+        int a; //Variable declaration
+        a = 10; //Variable initialization
+        System.out.println(a);
+        System.out.println(a);
+        System.out.println(a);
+    }
+}
+```
+
+#### Execution Result for a = 10
+
+```bash
+10
+10
+10
+```
+
+Now let's change it to `a = 20` and run it.
+
+#### Var2
+
+```java
+package variable;
+
+public class Var2 {
+    public static void main(String[] args) {
+        int a;              // Variable declaration
+        a = 20;             // Changed 10 -> 20
+        System.out.println(a);
+        System.out.println(a);
+        System.out.println(a);
+    }
+}
+```
+
+#### Execution Result for a = 20
+```bash
+20
+20
+20
+```
+
+You can see that when the value of `a` is changed, all output results change together.
+
+---
+
+#### Variable Declaration
+
+`int a`
+- Creates a data storage space named `a` that can store integer numbers (`integer`). This is called a variable.
+- Creating a variable in this way is called variable declaration.
+- Now the variable `a` can store integer numbers.
+- There are variables that can store various types of values, not just integers, such as characters and decimals. For now, remember `int`, which stores integer numbers.
+
+#### Assigning Values to Variables
+
+`a = 10`
+- In Java, `=` means storing the value on the right side into the left side. This is different from saying two values are equal (`equals`) in mathematics!
+- Stores the value `10` into the variable `a`, which is a data storage space that can hold numbers.
+- Assigning and storing a value to a declared variable for the first time like this is called variable initialization.
+
+#### Reading Variable Values
+
+`System.out.println(a)`
+- The method to read and use values stored in variables is simple. Just write the variable name.
+- If the variable `a` contains `10`, Java reads the variable's value at runtime and uses it. Therefore, it is interpreted as follows:
+    - `System.out.println(a)   //Reads the value of variable a`
+    - `System.out.println(10)  //Changed to 10, which is the value of a, outputs the number 10`
+- Note that variable values can be read repeatedly. Reading a variable's value doesn't make it disappear.
+
+### Changing Variable Values
+
+Variables, as the name suggests, are values that can change. Simply put, it means you can change the value stored in variable `a` at any time.
+This time, let's change the variable's value in the middle.
+
+#### Var3
+
+```java
+package variable;
+
+public class Var3 {
+    public static void main(String[] args) {
+        int a;           //Variable declaration
+        a = 10;          //Variable initialization: a(10)
+        System.out.println(a);    //Outputs 10
+        a = 50;          //Variable value change: a(10 -> 50)
+        System.out.println(a);    //Outputs 50
+    }
+}
+```
+
+#### Execution Result
+```bash
+10
+50
+```
+
+You can see that after the variable's value was changed, 50 was output instead of 10.

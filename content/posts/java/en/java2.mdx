@@ -1,0 +1,46 @@
+---
+title: "Comments"
+date: "2026-01-24"
+category: "java"
+tags: ["java", "basics", "programming"]
+description: "How to use Java comments for code explanation and temporary disabling"
+---
+
+### Comments
+
+When source code becomes complex, you may want to add explanations to help understand the code.
+Or you might want to temporarily disable certain code without deleting it.
+In such cases, you can use comments. Java ignores anything marked as a comment.
+
+##### Types of Comments
+- Single line comment
+    - Starts with the `//` symbol. All text after this symbol is treated as a comment.
+- Multi line comment
+    - Starts with `/*` and ends with `*/`. All text between these symbols is treated as a comment.
+
+### CommentJava
+
+```java
+public class CommentJava {
+    /*
+    This section explains comments.
+    */
+    public static void main(String[] args) {
+        System.out.println("hello java1"); //Outputs hello java1. (single line comment - partial application)
+        //System.out.println("hello java2"); Single line comment - applies to entire line
+        /* Multi line comment
+        System.out.println("hello java3");
+        System.out.println("hello java4");
+        */
+    }
+}
+```
+
+### Execution Result
+
+```bash
+hello java1
+```
+
+- You can see that the code marked as comments was not executed.
+- Simply put, comments are parts that the Java program ignores and doesn't read. They are used for humans to read.

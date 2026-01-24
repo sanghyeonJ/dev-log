@@ -24,6 +24,15 @@ const mdxComponents = {
   h3: (props: any) => (
     <h3 className="text-2xl font-semibold mt-8 mb-3 text-gray-800" {...props} />
   ),
+  h4: (props: any) => (
+    <h4 className="text-xl font-semibold mt-6 mb-2 text-gray-800" {...props} />
+  ),
+  h5: (props: any) => (
+    <h5 className="text-lg font-semibold mt-4 mb-1 text-gray-800" {...props} />
+  ),
+  h6: (props: any) => (
+    <h6 className="text-base font-semibold mt-2 mb-0 text-gray-800" {...props} />
+  ),
 
   /* 본문 */
   p: (props: any) => (
@@ -36,6 +45,9 @@ const mdxComponents = {
   ),
   li: (props: any) => (
     <li className="mb-1" {...props} />
+  ),
+  ol: (props: any) => (
+    <ol className="list-decimal pl-6 mb-4 text-gray-700" {...props} />
   ),
 
   /* 링크 */
