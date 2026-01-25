@@ -1,0 +1,86 @@
+---
+title: "변수선언과 초기화"
+date: "2026-01-25"
+category: "java"
+tags: ["java", "기초", "프로그래밍"]
+description: "변수를 선언하고 초기화하는 방법"
+---
+
+### 변수선언
+
+변수를 선언하면 컴퓨터의 메모리 공간을 확보해서 그곳에 데이터를 저장할 수 있다. 그리고 변수의 이름을 통해서 해당 메모리 공간에 접근할 수 있다. 쉽게 이야기해서 데이터를 보관할 수 있는 공간을 만들고, 그곳에 이름을 부여한다.
+
+#### Var1
+```java
+package variable;
+
+public class Var1 {
+    public static void main(String[] args) {
+        int a;
+        int b;
+        int c,d;
+    }
+}
+```
+
+변수는 다음과 같이 하나씩 선언할 수도 있고
+```java
+int a;
+int b;
+```
+
+다음과 같이 한번에 여러 변수를 선언할 수도 있다.
+```java
+int c,d;
+```
+
+### 변수 초기화
+
+변수를 선언하고, 선언한 변수에 처음으로 값을 저장하는 것을 변수 초기화라 한다.
+
+#### Var2
+```java
+package variable;
+
+public class Var2 {
+    public static void main(String[] args) {
+        //1. 변수 선언, 초기화 각각 따로
+        int a;
+        a = 1;
+        System.out.println(a);
+
+        int b = 2;             //2. 변수 선언과 초기화를 한번에
+        System.out.println(b);
+
+        int c = 3, d = 4;      //3. 여러 변수 선언과 초기화를 한번에
+        System.out.println(c);
+        System.out.println(d);
+    }
+}
+```
+1. 변수의 선언과 초기화를 각각 따로 할 수 있다.
+2. 변수를 선언하면서 동시에 초기화 할 수 있다.  
+    `int b` 를 사용해서 변수 `b` 를 만들고 그 다음에 바로 `b = 2` 를 사용해서 변수 `b` 에 값 2를 저장한다.
+3. 여러 변수를 선언하면서 초기화도 동시에 진행할 수 있다.
+
+### 변수는 초기화 해야한다
+
+#### Var3
+```java
+package variable;
+
+public class Var6 {
+    public static void main(String[] args) {
+        int a;
+        System.out.println(a); // 컴파일 에러 발생
+    }
+}
+```
+
+초기화 하지 않은 변수를 읽을 경우 다음과 같은 컴파일 에러가 발생한다.
+```bash
+java: variable a might not have been initialized
+```
+
+컴퓨터에서 메모리는 여러 시스템이 함께 사용하는 공간이다. 그래서 어떠한 값들이 계속 저장된다.  
+변수를 선언하면 메모리상의 어떤 공간을 차지하고 사용한다. 그런데 그 공간에 기존에 어떤 값이 있었는지는 아무도 모른다. 따라서 초기화를 하지 않으면 이상한 값이 출력될 수 있다. 이런 문제를 예방하기 위해 자바는 변수를 초기화 하도록 강제한다.

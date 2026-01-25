@@ -1,0 +1,87 @@
+---
+title: "Variable Declaration and Initialization"
+date: "2026-01-25"
+category: "java"
+tags: ["java", "basics", "programming"]
+description: "How to declare and initialize variables"
+---
+
+### Variable Declaration
+
+When you declare a variable, you reserve memory space in the computer to store data there. You can then access that memory space through the variable's name. Simply put, you create a space where data can be stored and give it a name.
+
+#### Var1
+```java
+package variable;
+
+public class Var1 {
+    public static void main(String[] args) {
+        int a;
+        int b;
+        int c,d;
+    }
+}
+```
+
+Variables can be declared one at a time like this:
+```java
+int a;
+int b;
+```
+
+Or you can declare multiple variables at once like this:
+```java
+int c,d;
+```
+
+### Variable Initialization
+
+Declaring a variable and storing a value in it for the first time is called variable initialization.
+
+#### Var2
+```java
+package variable;
+
+public class Var2 {
+    public static void main(String[] args) {
+        //1. Variable declaration and initialization separately
+        int a;
+        a = 1;
+        System.out.println(a);
+
+        int b = 2;             //2. Variable declaration and initialization together
+        System.out.println(b);
+
+        int c = 3, d = 4;      //3. Multiple variable declaration and initialization together
+        System.out.println(c);
+        System.out.println(d);
+    }
+}
+```
+1. Variable declaration and initialization can be done separately.
+2. You can initialize a variable at the same time as declaring it.  
+    Use `int b` to create variable `b`, then immediately use `b = 2` to store the value 2 in variable `b`.
+3. You can declare multiple variables and initialize them at the same time.
+
+### Variables Must Be Initialized
+
+#### Var3
+```java
+package variable;
+
+public class Var6 {
+    public static void main(String[] args) {
+        int a;
+        System.out.println(a); // Compile error occurs
+    }
+}
+```
+
+If you try to read an uninitialized variable, the following compile error occurs:
+
+```bash
+java: variable a might not have been initialized
+```
+
+In computers, memory is a space shared by multiple systems. Therefore, various values are constantly being stored there.  
+When you declare a variable, it occupies and uses some space in memory. However, no one knows what value was previously in that space. Therefore, if you don't initialize it, strange values might be output. To prevent such problems, Java forces you to initialize variables.

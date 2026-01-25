@@ -1,0 +1,117 @@
+---
+title: "Variable Types 2"
+date: "2026-01-25"
+category: "java"
+tags: ["java", "basics", "programming"]
+description: "Types and differences of numeric types and variable naming conventions"
+---
+
+### Numeric Types
+
+Let's take a detailed look at various numeric types this time.  
+Let's write the following code right away.
+
+#### Var1
+```java
+package variable;
+
+public class Var1 {
+    public static void main(String[] args) {
+        //Integer
+        byte b = 127; //-128 ~ 127
+        short s = 32767; // -32,768 ~ 32,767
+        int i = 2147483647; //-2,147,483,648 ~ 2,147,483,647 (approximately 2 billion)
+
+        //-9,223,372,036,854,775,808 ~ 9,223,372,036,854,775,807
+        long l = 9223372036854775807L;
+
+        //Floating point number
+        float f = 10.0f;
+        double d = 10.0;
+    }
+}
+```
+
+Using less memory allows you to represent smaller numbers, and using more memory allows you to represent larger numbers.  
+When you declare a variable, it occupies memory space according to its representable range. That's why various types are provided to suit your needs.
+
+
+The range of numbers that can be represented and the memory space occupied are as follows. Other types are also organized together.  
+- **Integer Types**
+    - `byte` : -128 ~ 127 (1byte, 2⁸)
+    - `short` : -32,768 ~ 32,767 (2byte, 2¹⁶)
+    - `int` : -2,147,483,648 ~ 2,147,483,647 (approximately 2 billion) (4byte, 2³²)
+    - `long` : -9,223,372,036,854,775,808 ~ 9,223,372,036,854,775,807 (8byte, 2⁶⁴)  
+- **Floating Point Types**
+    - `float` : Approximately -3.4E38 ~ 3.4E38, 7-digit precision (4byte, 2³²)
+    - `double` : Approximately -1.7E308 ~ 1.7E308, 15-digit precision (8byte, 2⁶⁴)  
+- **Others**
+    - `boolean` : `true`, `false` (1byte)
+    - `char` : Single character (2byte)
+    - `String` : Represents strings. Memory usage varies dynamically according to character length.
+
+#### Literal Type Specification
+- Integer literals use `int` as the default. Therefore, they can represent up to the `int` range. If a number exceeds the `int` range of approximately 2 billion, you must add `L` to change the integer literal to `long`. (Both uppercase `L` and lowercase `l` are possible, but lowercase `l` can be confused with the number 1, so it's not recommended.)
+- Floating point literals use `double` type as the default. To use `float` type, you must add `f` to specify it as `float` type.
+
+### Variable Type Summary
+
+#### The following types are rarely used in practice.
+- `byte` : The representable range is too small. Also, Java is designed to efficiently calculate with 4byte(`int`) by default. Let's use `int`.
+    - There's almost no case where you directly declare a `byte` type and assign numeric values to it for calculation.
+    - Instead, it's mainly used for file transfer, file copying, etc., because files are handled in byte units.
+- `short` : The representable range is too small. Also, Java is designed to efficiently calculate with 4byte(`int`) by default. Let's use `int`.
+- `float` : The representable range and precision are low. Let's use `double` for floating point types.
+- `char` : There's almost no case where you need to represent a single character. You can also use strings when representing a single character.
+    - For example, you can use it like `String a = "b"`.
+
+
+#### Commonly Used Types
+The types commonly used in practice are as follows:  
+- Integer - `int`, `long` : Java uses `int` by default for integers. If it seems like it might exceed 2 billion, you can use `long`.
+    - `byte` is used when handling files.
+- Floating point - `double` : For floating point numbers, just use `double` without hesitation.
+- Boolean - `boolean` : Represents true or false with `true`, `false`. It's frequently used in conditional statements later.
+- String - `String` : When handling characters, it's convenient to use `String` for both single characters and strings.
+
+Except for commonly used types, the rest are rarely used in practice. At most, `byte` is used during file transfer.
+
+---
+
+## Variable Naming Rules
+
+In Java, there are rules and conventions for naming variables.  
+**Rules are mandatory**. If you don't follow the rules, compile errors will occur.  
+**Conventions are not mandatory, but since developers worldwide follow these conventions, you can think of them as practically rules**.
+
+#### Rules
+- Variable names cannot start with a number. (Examples: `1num`, `1st`)
+    - However, including numbers in the name is possible (Examples: `myVar1`, `num1`).
+- Names cannot contain spaces.
+- Java reserved words cannot be used as variable names. (Examples: `int`, `class`, `public`)
+- Variable names can only use English letters (`a-z`, `A-Z`), numbers (`0-9`), dollar sign (`$`), or underscore (`_`).
+
+#### Conventions
+- Camel case starting with lowercase
+- Variable names generally start with lowercase. For variable names consisting of multiple words, the first word
+- starts with lowercase, and each subsequent word starts with uppercase using camel case. (Examples: `orderDetail`, `myAccount`)
+
+**Camel Case**  
+Camel Case is one of the naming conventions commonly used in programming when naming variables, functions, classes, etc. The name of this convention comes from the fact that when a name consists of multiple words, each word's first letter starts with uppercase, and these uppercase letters look like a camel's humps. Using camel case allows you to easily distinguish multiple words without putting spaces in the name, making variable names easier to understand. Also, since most programming languages cannot include spaces in names, camel case is a good way to work around this limitation.
+
+### Java Language Conventions Summary
+### Classes start with uppercase, everything else starts with lowercase
+
+- In Java, class names start with an uppercase letter. Everything else starts with a lowercase letter. Just apply camel case here. This way, you can remember all Java conventions!
+- Examples: Classes start with uppercase first letter, everything else starts with lowercase first letter + camel case
+    - Classes: `Person`, `OrderDetail`
+    - Everything else including variables: `firstName`, `userAccount`
+- There are exactly 2 exceptions here.
+    - Constants use all uppercase and are separated by underscores. (Constants will be learned later)
+        - `USER_LIMIT`
+    - Packages use all lowercase. (Packages will be learned later)
+        - `org.spring.boot`
+
+**Note**: Variable names should be meaningful and clearly describe their purpose.
+- `a`, `b` : These variables don't describe their purpose. They should only be used in simple examples.
+- `studentCount`, `maxScore`, `userAccount`, `orderCount` : Clearly describe their purpose.

@@ -1,0 +1,82 @@
+---
+title: "Variable Types 1"
+date: "2026-01-25"
+category: "java"
+tags: ["java", "basics", "programming"]
+description: "Types and differences of variable types"
+---
+
+Variables exist in various formats depending on the type of data they handle.  
+Let's run the following code.
+
+```java
+package variable;
+
+public class Var1 {
+    public static void main(String[] args) {
+        int a = 100;             //Integer
+        double b = 10.5;         //Floating point number
+        boolean c = true;        //Boolean - can input true, false
+        char d = 'A';            //Single character
+        String e = "Hello Java"; //String - special type for handling strings
+        System.out.println(a);
+        System.out.println(b);
+        System.out.println(c);
+        System.out.println(d);
+        System.out.println(e);
+    }
+}
+```
+
+#### Execution Result
+
+```java
+100
+10.5
+true
+A
+Hello Java
+```
+
+Variables exist in various formats depending on the type of data they handle. These formats are called `types` in English.
+
+- `int` : Handles integers. Examples: `1`, `100`, `1000`
+- `double` : Handles floating point numbers. Examples: `0.2`, `1.5`, `100.121`
+- `boolean` : Called boolean type. Can only use `true` and `false` values. Mainly used for determining true or false.
+- `char` : Used when handling a single character. Must be wrapped with single quotes (`'`). Examples: `'A'`, `'가'`
+- `String` : Handles strings. Must use double quotes. Example: `"hello java"`
+
+**Note**: `String` is a special type that starts with an uppercase letter. You'll need to learn about classes later to understand this in detail. For now, just understand that it's a special type for handling strings. We'll cover `String` in detail separately.
+
+#### Using Data That Matches Your Type
+
+Each variable must use values that match its specified type. For example, the first two codes below will cause compile errors:
+
+- `int a = "백원"` : String in integer type (X)
+- `int a = "100"` : String in integer type (X), this is the string `"100"`, not the number 100. It's wrapped in double quotes (`"`) which represent characters.
+- `int a = 100` : Integer 100 in integer type (O)
+
+### Literals
+
+Fixed values that developers write directly in code, such as `100`, `10.5`, `true`, `'A'`, `"Hello Java"`, are called literals in programming terminology.
+
+```java
+int a = 100;             //Integer literal
+double b = 10.5;         //Floating point literal
+boolean c = true;        //Boolean literal
+char d = 'A';            //Character literal
+String e = "Hello Java"; //String literal
+```
+
+Variable values can change, but literals are fixed values that developers input directly. Therefore, literals themselves do not change.
+
+#### The Meaning of 'Literals Themselves Do Not Change'
+
+To explain with an analogy:  
+**Variable** = **Box**  
+**Literal** = **Coin put in the box**  
+- You can put a 100 won coin (100) in the box (a)
+- Then replace it with a 200 won coin (200)  
+However,
+- The 100 won coin didn't change into a 200 won coin
+- You just put in a different coin
