@@ -1,0 +1,103 @@
+---
+title: "조건 분기1"
+date: "2026-01-26"
+category: "java"
+tags: ["java", "기초", "★"]
+description: "수의 크고 작음을 표시 하는 조건 분기"
+---
+
+## 수의 크고 작음을 표시 하는 조건 분기
+
+### 정수 x, y를 입력받아서 크기비교 후 결과를 출력하라
+
+우선 변수를 정의하면  
+x, y 그리고 x값을 검증할 bool_x, 마찬가지로 y값을 검증할 bool_y 네가지를 정의한다.
+```java
+int x = 0;
+int y = 0;
+boolean bool_x = true;
+boolean bool_y = true;
+```
+
+#### scanner 입력
+
+```java
+String s_x = sc.next();
+```
+- nextInt가 아닌 next로 받음
+- 입력값이 정수가 아닌경우에 에러가 발생할 수 있기 때문
+
+#### 예외 처리
+```java
+try {
+    x = Integer.parseInt(s_x);
+} catch(NumberFormatException e) {
+```
+- 숫자가 아니면 NumberFormatException
+- 에러 나도 프로그램 안 죽게 만들기
+
+#### 반복문
+```java
+do {
+   ...
+} while(false);
+```
+- 최소한 한번은 실행
+- 잘못 입력시 반복
+
+#### 비교 후 출력
+```java
+if(x > y) {
+    System.out.println("x가 y보다 큽니다.");
+}else if(x < y) {
+    System.out.println("x가 y보다 작습니다.");
+}else {
+    System.out.println("x와 y는 같습니다.");
+}
+```
+
+### 전체 코드
+```java
+public static void main(String[] args) {
+        
+    Scanner sc = new Scanner(System.in);
+    
+    int x = 0;
+    int y = 0;
+    boolean bool_x = true;
+    boolean bool_y = true;
+    
+    do {
+        System.out.print("x 를 입력하세요 : ");
+        String s_x = sc.next();
+        try {
+            x = Integer.parseInt(s_x);
+            bool_x = false;
+        }catch(NumberFormatException e) {
+            bool_x = true;
+            System.out.print("다시 입력하세요 : ");
+        }
+    }while(bool_x);
+    
+    do {
+        System.out.print("y 를 입력하세요 : ");
+        String s_y = sc.next();
+        try {
+            y = Integer.parseInt(s_y);
+            bool_y = false;
+        }catch(NumberFormatException e) {
+            bool_y = true;
+            System.out.print("다시 입력하세요 : ");
+        }
+    }while(bool_y);
+    
+    if(x > y) {
+        System.out.println("x가 y보다 큽니다.");
+    }else if(x < y) {
+        System.out.println("x가 y보다 작습니다.");
+    }else {
+        System.out.println("x와 y는 같습니다.");
+    }
+
+}
+```

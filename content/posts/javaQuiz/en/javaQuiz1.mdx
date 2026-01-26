@@ -1,0 +1,86 @@
+---
+title: "Diamond Star"
+date: "2026-01-26"
+category: "java"
+tags: ["java", "basics", "★★"]
+description: "Printing diamond-shaped stars to the console"
+---
+
+### Execution Result
+
+```java
+    *
+   ***
+  *****
+ *******
+*********
+ *******
+  *****
+   ***
+    *
+```
+
+#### Key Points
+- Top part: number of stars increases
+- Bottom part: number of stars decreases
+- Center alignment with spaces in front
+
+#### Upper Triangle Rules
+
+| Line(i) | Spaces | Stars |
+| :---: | :---: | :---: |
+| 0 | 4 | 1 |
+| 1 | 3 | 3 |
+| 2 | 2 | 5 |
+| 3 | 1 | 7 |
+| 4 | 0 | 9 |
+
+**Rule Summary** (n is the number of lines in the upper triangle)
+- Spaces : `n - i - 1`
+- Stars : `2 * i + 1`
+
+#### Lower Triangle Rules
+
+| Line(i) | Spaces | Stars |
+| :---: | :---: | :---: |
+| 3 | 1 | 7 |
+| 2 | 2 | 5 |
+| 1 | 3 | 3 |
+| 0 | 4 | 1 |
+
+**Rule Summary** (n is the number of lines in the upper triangle)
+- Spaces : `n - i - 1`
+- Stars : `2 * i + 1`
+- Center line must not be duplicated
+
+### Code
+```java
+int n = 5; // Half height of diamond (number of lines in upper triangle including center line)
+
+// Upper part
+for (int i = 0; i < n; i++) {
+    // Spaces
+    for (int j = 0; j < n - i - 1; j++) {
+        System.out.print(" ");
+    }
+    // Stars
+    for (int j = 0; j < 2 * i + 1; j++) {
+        System.out.print("*");
+    }
+    System.out.println();
+}
+
+// Lower part
+for (int i = n - 2; i >= 0; i--) {
+    // Spaces
+    for (int j = 0; j < n - i - 1; j++) {
+        System.out.print(" ");
+    }
+    // Stars
+    for (int j = 0; j < 2 * i + 1; j++) {
+        System.out.print("*");
+    }
+    System.out.println();
+}
+
+```

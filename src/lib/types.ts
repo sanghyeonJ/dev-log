@@ -17,6 +17,8 @@ export interface BlogPost {
   description: string;
   /** 포스트 내용 (MDX 원본 문자열 또는 컴파일된 결과) */
   content?: string | any;
+  /** 파일 생성 시간 (밀리초 타임스탬프) */
+  ctime?: number;
 }
 
 /**

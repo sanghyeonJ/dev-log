@@ -1,0 +1,103 @@
+---
+title: "条件分岐1"
+date: "2026-01-26"
+category: "java"
+tags: ["java", "基礎", "★"]
+description: "数の大小を表示する条件分岐"
+---
+
+## 数の大小を表示する条件分岐
+
+### 整数x、yを入力して大小比較後、結果を出力せよ
+
+まず変数を定義すると  
+x、y、そしてx値を検証するbool_x、同様にy値を検証するbool_yの4つを定義する。
+```java
+int x = 0;
+int y = 0;
+boolean bool_x = true;
+boolean bool_y = true;
+```
+
+#### scanner入力
+
+```java
+String s_x = sc.next();
+```
+- nextIntではなくnextで受け取る
+- 入力値が整数でない場合にエラーが発生する可能性があるため
+
+#### 例外処理
+```java
+try {
+    x = Integer.parseInt(s_x);
+} catch(NumberFormatException e) {
+```
+- 数字でない場合はNumberFormatException
+- エラーが発生してもプログラムが終了しないようにする
+
+#### 繰り返し文
+```java
+do {
+   ...
+} while(false);
+```
+- 最低限一度は実行
+- 誤入力時に繰り返す
+
+#### 比較後出力
+```java
+if(x > y) {
+    System.out.println("xがyより大きいです。");
+}else if(x < y) {
+    System.out.println("xがyより小さいです。");
+}else {
+    System.out.println("xとyは等しいです。");
+}
+```
+
+### 全体コード
+```java
+public static void main(String[] args) {
+        
+    Scanner sc = new Scanner(System.in);
+    
+    int x = 0;
+    int y = 0;
+    boolean bool_x = true;
+    boolean bool_y = true;
+    
+    do {
+        System.out.print("x を入力してください : ");
+        String s_x = sc.next();
+        try {
+            x = Integer.parseInt(s_x);
+            bool_x = false;
+        }catch(NumberFormatException e) {
+            bool_x = true;
+            System.out.print("再度入力してください : ");
+        }
+    }while(bool_x);
+    
+    do {
+        System.out.print("y を入力してください : ");
+        String s_y = sc.next();
+        try {
+            y = Integer.parseInt(s_y);
+            bool_y = false;
+        }catch(NumberFormatException e) {
+            bool_y = true;
+            System.out.print("再度入力してください : ");
+        }
+    }while(bool_y);
+    
+    if(x > y) {
+        System.out.println("xがyより大きいです。");
+    }else if(x < y) {
+        System.out.println("xがyより小さいです。");
+    }else {
+        System.out.println("xとyは等しいです。");
+    }
+
+}
+```

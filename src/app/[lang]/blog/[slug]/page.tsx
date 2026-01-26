@@ -8,6 +8,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import remarkGfm from 'remark-gfm';
 
 /**
  * MDX 컴포넌트 커스터마이징
@@ -80,6 +81,37 @@ const mdxComponents = {
   blockquote: (props: any) => (
     <blockquote
       className="border-l-4 border-gray-300 pl-4 italic text-gray-600 my-6"
+      {...props}
+    />
+  ),
+
+  /* 테이블 */
+  table: (props: any) => (
+    <div className="overflow-x-auto my-6">
+      <table
+        className="min-w-full border-collapse border border-gray-300"
+        {...props}
+      />
+    </div>
+  ),
+  thead: (props: any) => (
+    <thead className="bg-gray-100" {...props} />
+  ),
+  tbody: (props: any) => (
+    <tbody {...props} />
+  ),
+  tr: (props: any) => (
+    <tr className="border-b border-gray-200" {...props} />
+  ),
+  th: (props: any) => (
+    <th
+      className="border border-gray-300 px-4 py-2 text-left font-semibold text-gray-900"
+      {...props}
+    />
+  ),
+  td: (props: any) => (
+    <td
+      className="border border-gray-300 px-4 py-2 text-gray-700"
       {...props}
     />
   ),
@@ -217,7 +249,7 @@ export default async function BlogPostPage({
 
       {/* 포스트 내용 */}
       <div className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-strong:text-gray-900 prose-code:text-gray-900 prose-pre:bg-gray-100 prose-pre:text-gray-900">
-        <MDXRemote source={post.content} components={mdxComponents} />
+        <MDXRemote source={post.content} components={mdxComponents} options={{ mdxOptions: { remarkPlugins: [remarkGfm] } }} />
       </div>
 
       {/* 하단 네비게이션 */}

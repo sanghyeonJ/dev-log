@@ -48,6 +48,7 @@ export async function getPosts(options: GetPostsOptions = {}): Promise<BlogPost[
           if (fs.existsSync(langFile)) {
             const fileContents = fs.readFileSync(langFile, 'utf8');
             const { data } = matter(fileContents);
+            const stats = fs.statSync(langFile);
             
             allPosts.push({
               slug,
@@ -56,6 +57,7 @@ export async function getPosts(options: GetPostsOptions = {}): Promise<BlogPost[
               date: data.date || '',
               tags: data.tags || [],
               description: data.description || '',
+              ctime: stats.birthtime.getTime(),
             });
           }
         }
@@ -76,6 +78,7 @@ export async function getPosts(options: GetPostsOptions = {}): Promise<BlogPost[
           const langFile = path.join(langPath, `${slug}.mdx`);
           const fileContents = fs.readFileSync(langFile, 'utf8');
           const { data } = matter(fileContents);
+          const stats = fs.statSync(langFile);
           
           allPosts.push({
             slug,
@@ -84,6 +87,7 @@ export async function getPosts(options: GetPostsOptions = {}): Promise<BlogPost[
             date: data.date || '',
             tags: data.tags || [],
             description: data.description || '',
+            ctime: stats.birthtime.getTime(),
           });
         }
       }
@@ -92,9 +96,19 @@ export async function getPosts(options: GetPostsOptions = {}): Promise<BlogPost[
   
   // 정렬
   if (sort === 'date-desc') {
-    allPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+    allPosts.sort((a, b) => {
+      const dateDiff = new Date(b.date).getTime() - new Date(a.date).getTime();
+      if (dateDiff !== 0) return dateDiff;
+      // 날짜가 같으면 생성 시간으로 정렬 (최신이 먼저)
+      return (b.ctime || 0) - (a.ctime || 0);
+    });
   } else if (sort === 'date-asc') {
-    allPosts.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    allPosts.sort((a, b) => {
+      const dateDiff = new Date(a.date).getTime() - new Date(b.date).getTime();
+      if (dateDiff !== 0) return dateDiff;
+      // 날짜가 같으면 생성 시간으로 정렬 (오래된 것이 먼저)
+      return (a.ctime || 0) - (b.ctime || 0);
+    });
   } else if (sort === 'title-asc') {
     allPosts.sort((a, b) => a.title.localeCompare(b.title));
   }

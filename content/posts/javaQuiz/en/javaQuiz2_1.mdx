@@ -1,0 +1,103 @@
+---
+title: "Conditional Branching 1"
+date: "2026-01-26"
+category: "java"
+tags: ["java", "basics", "★"]
+description: "Conditional branching to display number comparison"
+---
+
+## Conditional Branching to Display Number Comparison
+
+### Input integers x and y, compare their sizes, and output the result
+
+First, define variables  
+Define four variables: x, y, bool_x to validate the x value, and bool_y to validate the y value.
+```java
+int x = 0;
+int y = 0;
+boolean bool_x = true;
+boolean bool_y = true;
+```
+
+#### scanner input
+
+```java
+String s_x = sc.next();
+```
+- Use next instead of nextInt
+- Because an error may occur if the input value is not an integer
+
+#### Exception handling
+```java
+try {
+    x = Integer.parseInt(s_x);
+} catch(NumberFormatException e) {
+```
+- NumberFormatException if not a number
+- Prevent the program from crashing even if an error occurs
+
+#### Loop
+```java
+do {
+   ...
+} while(false);
+```
+- Execute at least once
+- Repeat on incorrect input
+
+#### Output after comparison
+```java
+if(x > y) {
+    System.out.println("x is greater than y.");
+}else if(x < y) {
+    System.out.println("x is less than y.");
+}else {
+    System.out.println("x and y are equal.");
+}
+```
+
+### Complete code
+```java
+public static void main(String[] args) {
+        
+    Scanner sc = new Scanner(System.in);
+    
+    int x = 0;
+    int y = 0;
+    boolean bool_x = true;
+    boolean bool_y = true;
+    
+    do {
+        System.out.print("Enter x : ");
+        String s_x = sc.next();
+        try {
+            x = Integer.parseInt(s_x);
+            bool_x = false;
+        }catch(NumberFormatException e) {
+            bool_x = true;
+            System.out.print("Please enter again : ");
+        }
+    }while(bool_x);
+    
+    do {
+        System.out.print("Enter y : ");
+        String s_y = sc.next();
+        try {
+            y = Integer.parseInt(s_y);
+            bool_y = false;
+        }catch(NumberFormatException e) {
+            bool_y = true;
+            System.out.print("Please enter again : ");
+        }
+    }while(bool_y);
+    
+    if(x > y) {
+        System.out.println("x is greater than y.");
+    }else if(x < y) {
+        System.out.println("x is less than y.");
+    }else {
+        System.out.println("x and y are equal.");
+    }
+
+}
+```
