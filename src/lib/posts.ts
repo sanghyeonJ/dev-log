@@ -12,6 +12,32 @@ import { BlogPost, GetPostsOptions } from './types';
 const postsDirectory = path.join(process.cwd(), 'content', 'posts');
 
 /**
+ * frontmatter에서 날짜와 시간을 파싱하여 타임스탬프를 반환합니다
+ * @param date 날짜 필드 (YYYY-MM-DD 또는 ISO 형식)
+ * @param time 시간 필드 (HH:mm:ss 형식, 선택사항)
+ * @param fallbackTime fallback 타임스탬프 (파일 생성 시간 등)
+ * @returns 밀리초 타임스탬프
+ */
+function parseDateTime(date: string, time?: string, fallbackTime?: number): number {
+  if (!date) {
+    return fallbackTime || 0;
+  }
+
+  // ISO 형식 (시간 포함)인지 확인: "2026-01-26T14:30:00" 또는 "2026-01-26 14:30:00"
+  if (date.includes('T') || (date.includes(' ') && date.split(' ').length > 1)) {
+    const parsed = new Date(date).getTime();
+    return isNaN(parsed) ? (fallbackTime || 0) : parsed;
+  }
+
+  // YYYY-MM-DD 형식인 경우
+  const timeStr = time || '00:00:00';
+  const dateTimeStr = `${date}T${timeStr}`;
+  const parsed = new Date(dateTimeStr).getTime();
+  
+  return isNaN(parsed) ? (fallbackTime || 0) : parsed;
+}
+
+/**
  * 모든 블로그 포스트의 메타데이터를 가져옵니다
  * @param options 필터링 및 정렬 옵션
  * @returns 블로그 포스트 메타데이터 배열
@@ -57,7 +83,7 @@ export async function getPosts(options: GetPostsOptions = {}): Promise<BlogPost[
               date: data.date || '',
               tags: data.tags || [],
               description: data.description || '',
-              ctime: stats.birthtime.getTime(),
+              ctime: parseDateTime(data.date, data.time, stats.birthtime.getTime()),
             });
           }
         }
@@ -87,7 +113,7 @@ export async function getPosts(options: GetPostsOptions = {}): Promise<BlogPost[
             date: data.date || '',
             tags: data.tags || [],
             description: data.description || '',
-            ctime: stats.birthtime.getTime(),
+            ctime: parseDateTime(data.date, data.time, stats.birthtime.getTime()),
           });
         }
       }
