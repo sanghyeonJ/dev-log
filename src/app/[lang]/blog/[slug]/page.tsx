@@ -17,19 +17,19 @@ import remarkGfm from 'remark-gfm';
 const mdxComponents = {
   // 예: 코드 블록 스타일링 등
   h1: (props: any) => (
-    <h1 className="text-4xl font-bold mt-8 mb-6 text-gray-900" {...props} />
+    <h1 className="text-2xl md:text-4xl font-bold mt-4 md:mt-8 mb-3 md:mb-6 text-gray-900" {...props} />
   ),
   h2: (props: any) => (
-    <h2 className="text-3xl font-bold mt-10 mb-4 text-gray-900" {...props} />
+    <h2 className="text-xl md:text-3xl font-bold mt-6 md:mt-10 mb-2 md:mb-4 text-gray-900" {...props} />
   ),
   h3: (props: any) => (
-    <h3 className="text-2xl font-semibold mt-8 mb-3 text-gray-800" {...props} />
+    <h3 className="text-lg md:text-2xl font-semibold mt-4 md:mt-8 mb-2 md:mb-3 text-gray-800" {...props} />
   ),
   h4: (props: any) => (
-    <h4 className="text-xl font-semibold mt-6 mb-2 text-gray-800" {...props} />
+    <h4 className="text-base md:text-xl font-semibold mt-3 md:mt-6 mb-1 md:mb-2 text-gray-800" {...props} />
   ),
   h5: (props: any) => (
-    <h5 className="text-lg font-semibold mt-4 mb-1 text-gray-800" {...props} />
+    <h5 className="text-sm md:text-lg font-semibold mt-2 md:mt-4 mb-1 text-gray-800" {...props} />
   ),
   h6: (props: any) => (
     <h6 className="text-base font-semibold mt-2 mb-0 text-gray-800" {...props} />
@@ -37,18 +37,18 @@ const mdxComponents = {
 
   /* 본문 */
   p: (props: any) => (
-    <p className="text-base leading-7 text-gray-700 mb-4" {...props} />
+    <p className="text-sm md:text-base leading-7 text-gray-700 mb-2 md:mb-4" {...props} />
   ),
 
   /* 리스트 */
   ul: (props: any) => (
-    <ul className="list-disc pl-6 mb-4 text-gray-700" {...props} />
+    <ul className="list-disc pl-4 md:pl-6 mb-2 md:mb-4 text-sm md:text-base text-gray-700" {...props} />
   ),
   li: (props: any) => (
     <li className="mb-1" {...props} />
   ),
   ol: (props: any) => (
-    <ol className="list-decimal pl-6 mb-4 text-gray-700" {...props} />
+    <ol className="list-decimal pl-4 md:pl-6 mb-2 md:mb-4 text-sm md:text-base text-gray-700" {...props} />
   ),
 
   /* 링크 */
@@ -72,7 +72,7 @@ const mdxComponents = {
   /* 코드 블록 */
   pre: (props: any) => (
     <pre
-      className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto mb-6"
+      className="bg-gray-900 text-gray-100 p-3 md:p-4 rounded-lg overflow-x-auto mb-3 md:mb-6"
       {...props}
     />
   ),
@@ -80,14 +80,14 @@ const mdxComponents = {
   /* 인용 */
   blockquote: (props: any) => (
     <blockquote
-      className="border-l-4 border-gray-300 pl-4 italic text-gray-600 my-6"
+      className="border-l-4 border-gray-300 pl-3 md:pl-4 italic text-gray-600 my-3 md:my-6"
       {...props}
     />
   ),
 
   /* 테이블 */
   table: (props: any) => (
-    <div className="overflow-x-auto my-6">
+    <div className="overflow-x-auto my-3 md:my-6">
       <table
         className="min-w-full border-collapse border border-gray-300"
         {...props}
@@ -105,13 +105,13 @@ const mdxComponents = {
   ),
   th: (props: any) => (
     <th
-      className="border border-gray-300 px-4 py-2 text-left font-semibold text-gray-900"
+      className="border border-gray-300 px-2 md:px-4 py-2 text-left font-semibold text-sm md:text-base text-gray-900"
       {...props}
     />
   ),
   td: (props: any) => (
     <td
-      className="border border-gray-300 px-4 py-2 text-gray-700"
+      className="border border-gray-300 px-2 md:px-4 py-2 text-sm md:text-base text-gray-700"
       {...props}
     />
   ),
@@ -198,11 +198,11 @@ export default async function BlogPostPage({
   }
 
   return (
-    <article className="max-w-4xl mx-auto px-4 py-8">
+    <article className="max-w-4xl mx-auto px-4 py-4 md:py-8">
       {/* 뒤로가기 버튼 */}
       <Link
         href={`/${lang}/blog`}
-        className="inline-block mb-6 text-blue-600 hover:text-blue-800 font-medium"
+        className="inline-block mb-4 md:mb-6 text-blue-600 hover:text-blue-800 font-medium"
       >
         ←{' '}
         {lang === 'ko'
@@ -213,10 +213,10 @@ export default async function BlogPostPage({
       </Link>
 
       {/* 포스트 헤더 */}
-      <header className="mb-8 bg-white p-6 rounded-lg shadow-sm">
-        <h1 className="text-4xl font-bold mb-4 text-gray-900">{post.title}</h1>
+      <header className="mb-4 md:mb-8 bg-white p-4 md:p-6 rounded-lg shadow-sm">
+        <h1 className="text-2xl md:text-4xl font-bold mb-2 md:mb-4 text-gray-900">{post.title}</h1>
 
-        <div className="flex items-center gap-4 text-sm text-gray-600 mb-4">
+        <div className="flex items-center gap-4 text-sm text-gray-600 mb-2 md:mb-4">
           <time dateTime={post.date} className="text-gray-600">
             {new Date(post.date).toLocaleDateString(
               lang === 'ko' ? 'ko-KR' : lang === 'jp' ? 'jp-JP' : 'en-US',
@@ -234,7 +234,7 @@ export default async function BlogPostPage({
 
         {/* 태그 */}
         {post.tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-4">
+          <div className="flex flex-wrap gap-2 mb-2 md:mb-4">
             {post.tags.map((tag) => (
               <span
                 key={tag}
@@ -253,7 +253,7 @@ export default async function BlogPostPage({
       </div>
 
       {/* 하단 네비게이션 */}
-      <div className="mt-12 pt-8 border-t border-gray-200">
+      <div className="mt-6 md:mt-12 pt-4 md:pt-8 border-t border-gray-200">
         <Link
           href={`/${lang}/blog`}
           className="inline-block text-blue-600 hover:text-blue-800 font-medium"

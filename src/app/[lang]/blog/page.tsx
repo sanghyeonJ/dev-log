@@ -75,17 +75,17 @@ function Pagination({
     if (totalPages <= 1) return null;
 
     return (
-        <nav className="flex items-center justify-center gap-2 mt-12">
+        <nav className="flex items-center justify-center gap-2 mt-6 md:mt-12">
             {/* 이전 버튼 */}
             {currentPage > 1 ? (
                 <Link
                     href={getPageUrl(currentPage - 1)}
-                    className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors"
+                    className="px-2 md:px-4 py-1 md:py-2 text-sm md:text-base border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors"
                 >
                     {texts.prev}
                 </Link>
             ) : (
-                <span className="px-4 py-2 border border-gray-300 rounded-md text-gray-400 cursor-not-allowed">
+                <span className="px-2 md:px-4 py-1 md:py-2 text-sm md:text-base border border-gray-300 rounded-md text-gray-400 cursor-not-allowed">
                     {texts.prev}
                 </span>
             )}
@@ -95,7 +95,7 @@ function Pagination({
                 <>
                     <Link
                         href={getPageUrl(1)}
-                        className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors"
+                        className="px-2 md:px-4 py-1 md:py-2 text-sm md:text-base border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors"
                     >
                         1
                     </Link>
@@ -110,7 +110,7 @@ function Pagination({
                 <Link
                     key={page}
                     href={getPageUrl(page)}
-                    className={`px-4 py-2 border rounded-md transition-colors ${
+                    className={`px-2 md:px-4 py-1 md:py-2 text-sm md:text-base border rounded-md transition-colors ${
                         page === currentPage
                             ? 'bg-blue-600 text-white border-blue-600 font-medium'
                             : 'border-gray-300 text-gray-700 hover:bg-gray-50'
@@ -128,7 +128,7 @@ function Pagination({
                     )}
                     <Link
                         href={getPageUrl(totalPages)}
-                        className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors"
+                        className="px-2 md:px-4 py-1 md:py-2 text-sm md:text-base border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors"
                     >
                         {totalPages}
                     </Link>
@@ -139,12 +139,12 @@ function Pagination({
             {currentPage < totalPages ? (
                 <Link
                     href={getPageUrl(currentPage + 1)}
-                    className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors"
+                    className="px-2 md:px-4 py-1 md:py-2 text-sm md:text-base border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 transition-colors"
                 >
                     {texts.next}
                 </Link>
             ) : (
-                <span className="px-4 py-2 border border-gray-300 rounded-md text-gray-400 cursor-not-allowed">
+                <span className="px-2 md:px-4 py-1 md:py-2 text-sm md:text-base border border-gray-300 rounded-md text-gray-400 cursor-not-allowed">
                     {texts.next}
                 </span>
             )}
@@ -195,13 +195,13 @@ export default async function BlogPage({
     const title = pageTitles[lang] || 'Blog';
 
     return (
-        <div className="max-w-4xl mx-auto px-4 py-8">
-            <h1 className="text-4xl font-bold mb-8 text-gray-900">{title}</h1>
+        <div className="max-w-4xl mx-auto px-4 py-4 md:py-8">
+            <h1 className="text-2xl md:text-4xl font-bold mb-4 md:mb-8 text-gray-900">{title}</h1>
 
             {/* 카테고리 필터 */}
             {categories.length > 0 && (
-                <div className="mb-6">
-                    <h2 className="text-lg font-semibold mb-2 text-gray-900">
+                <div className="mb-4 md:mb-6">
+                    <h2 className="text-base md:text-lg font-semibold mb-2 text-gray-900">
                         {lang === 'ko' ? '카테고리' : lang === 'jp' ? 'カテゴリー' : 'Categories'}
                     </h2>
                     <div className="flex flex-wrap gap-2">
@@ -248,19 +248,19 @@ export default async function BlogPage({
                                 : 'No posts yet.'}
                 </div>
             ) : (
-                <div className="space-y-6">
+                <div className="space-y-4 md:space-y-6">
                     {posts.map((post) => (
                         <article
                             key={`${post.category}-${post.slug}`}
-                            className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow"
+                            className="bg-white border border-gray-200 rounded-lg p-4 md:p-6 shadow-sm hover:shadow-md transition-shadow"
                         >
                             <Link href={`/${lang}/blog/${post.slug}`}>
-                                <h2 className="text-2xl font-semibold mb-2 text-gray-900 hover:text-blue-600 transition-colors">
+                                <h2 className="text-xl md:text-2xl font-semibold mb-2 text-gray-900 hover:text-blue-600 transition-colors">
                                     {post.title}
                                 </h2>
                             </Link>
 
-                            <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
+                            <div className="flex items-center gap-4 text-sm text-gray-500 mb-2 md:mb-3">
                                 <time dateTime={post.date}>
                                     {new Date(post.date).toLocaleDateString(
                                         lang === 'ko'
@@ -280,7 +280,7 @@ export default async function BlogPage({
                                 </span>
                             </div>
 
-                            <p className="text-gray-600 mb-3">{post.description}</p>
+                            <p className="text-sm md:text-base text-gray-600 mb-2 md:mb-3">{post.description}</p>
 
                             {/* 태그 */}
                             {post.tags.length > 0 && (
@@ -298,7 +298,7 @@ export default async function BlogPage({
 
                             <Link
                                 href={`/${lang}/blog/${post.slug}`}
-                                className="inline-block mt-3 text-blue-600 hover:text-blue-800 font-medium"
+                                className="inline-block mt-2 md:mt-3 text-blue-600 hover:text-blue-800 font-medium"
                             >
                                 {lang === 'ko'
                                     ? '더 읽기 →'

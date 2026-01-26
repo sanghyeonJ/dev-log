@@ -75,7 +75,7 @@ export default async function LangLayout({
                                 {/* 로고/홈 링크 */}
                                 <Link
                                     href={`/${lang}`}
-                                    className="text-xl font-bold text-gray-900 hover:text-blue-600 transition-colors"
+                                    className="text-lg md:text-xl font-bold text-gray-900 hover:text-blue-600 transition-colors"
                                 >
                                     S Devlog
                                 </Link>

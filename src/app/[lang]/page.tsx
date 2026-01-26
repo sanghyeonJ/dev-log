@@ -61,16 +61,16 @@ export default async function HomePage({
     const latestPosts = (await getPosts({ lang, sort: "date-desc" })).slice(0, 3);
 
     return (
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-12">
             {/* 히어로 섹션 */}
-            <section className="text-center mb-16">
-                <h1 className="text-5xl font-bold text-gray-900 mb-4">
+            <section className="text-center mb-8 md:mb-16">
+                <h1 className="text-3xl md:text-5xl font-bold text-gray-900 mb-2 md:mb-4">
                     {texts.title}
                 </h1>
-                <p className="text-xl text-gray-600 mb-8">{texts.subtitle}</p>
+                <p className="text-base md:text-xl text-gray-600 mb-4 md:mb-8">{texts.subtitle}</p>
                 <Link
                     href={`/${lang}/blog`}
-                    className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                    className="inline-block px-4 md:px-6 py-2 md:py-3 text-sm md:text-base bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
                 >
                     {texts.viewBlog}
                 </Link>
@@ -79,17 +79,17 @@ export default async function HomePage({
             {/* 최신 포스트 섹션 */}
             {latestPosts.length > 0 && (
                 <section>
-                    <h2 className="text-3xl font-bold text-gray-900 mb-8">
+                    <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 md:mb-8">
                         {texts.latestPosts}
                     </h2>
-                    <div className="grid md:grid-cols-3 gap-6">
+                    <div className="grid md:grid-cols-3 gap-4 md:gap-6">
                         {latestPosts.map((post) => (
                             <article
                                 key={`${post.category}-${post.slug}`}
                                 className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
                             >
                                 <Link href={`/${lang}/blog/${post.slug}`}>
-                                    <div className="p-6">
+                                    <div className="p-4 md:p-6">
                                         <div className="flex items-center gap-2 mb-2">
                                             <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">
                                                 {post.category}
@@ -107,10 +107,10 @@ export default async function HomePage({
                                                 )}
                                             </time>
                                         </div>
-                                        <h3 className="text-xl font-semibold mb-2 text-gray-900 hover:text-blue-600 transition-colors">
+                                        <h3 className="text-lg md:text-xl font-semibold mb-1 md:mb-2 text-gray-900 hover:text-blue-600 transition-colors">
                                             {post.title}
                                         </h3>
-                                        <p className="text-gray-600 text-sm line-clamp-2">
+                                        <p className="text-gray-600 text-xs md:text-sm line-clamp-2">
                                             {post.description}
                                         </p>
                                     </div>
