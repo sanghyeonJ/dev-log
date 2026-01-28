@@ -1,0 +1,107 @@
+---
+title: 条件分岐2
+date: '2026-01-28'
+category: java
+tags:
+  - java
+  - 基礎
+  - ★
+description: 正数・負数 / 偶数・奇数を区別する条件分岐
+time: '09:49:00'
+---
+
+## 正数・負数 / 偶数・奇数を区別する条件分岐
+
+まず変数を定義すると  
+入力値を受け取るx、値を検証するbool_xを宣言する。
+```java
+int x = 0;
+boolean bool_x = true;
+```
+
+#### 繰り返し文処理
+値を検証後、整数値でない場合に繰り返されるように処理する。
+```java
+do {
+    // 整数値の場合
+    bool_x = false;
+
+    // 整数値でない場合
+    bool_x = true
+}while(bool_x);
+```
+- 入力された値を検証後、bool_xにtrueまたはfalseの値を代入する
+- それに応じて、誤った値を入力した場合はtrueを代入してdo-while文を繰り返すようにする。
+
+#### 検証
+検証過程を経る。
+```java
+String s_x = sc.next();
+try {
+    x = Integer.parseInt(s_x);
+    bool_x = false;
+}catch(NumberFormatException e) {
+    bool_x = true;
+    System.out.print("再度入力してください : ");
+}
+```
+
+#### 分岐処理
+入力された値に対する分岐処理を進める。
+```java
+if(x > 0) {
+    if(x % 2 == 0) {
+        System.out.println("正の偶数です。");
+    }else {
+        System.out.println("正の奇数です。");
+    }
+}else if(x < 0) {
+    if(x % 2 == 0) {
+        System.out.println("負の偶数です。");
+    }else {
+        System.out.println("負の奇数です。");
+    }
+}else {
+    System.out.println("0です。");
+}
+```
+
+### 全体コード
+```java
+public static void main(String[] args) {
+        
+    Scanner sc = new Scanner(System.in);
+    
+    int x = 0;
+    boolean bool_x = true;
+    
+    System.out.print("x を入力してください : ");
+    do {
+        String s_x = sc.next();
+        try {
+            x = Integer.parseInt(s_x);
+            bool_x = false;
+            
+            if(x > 0) {
+                if(x % 2 == 0) {
+                    System.out.println("正の偶数です。");
+                }else {
+                    System.out.println("正の奇数です。");
+                }
+            }else if(x < 0) {
+                if(x % 2 == 0) {
+                    System.out.println("負の偶数です。");
+                }else {
+                    System.out.println("負の奇数です。");
+                }
+            }else {
+                System.out.println("0です。");
+            }
+        }catch(NumberFormatException e) {
+            bool_x = true;
+            System.out.print("再度入力してください : ");
+        }
+    }while(bool_x);
+
+}
+```

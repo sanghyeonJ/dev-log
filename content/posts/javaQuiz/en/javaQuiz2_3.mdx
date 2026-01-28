@@ -1,0 +1,165 @@
+---
+title: Conditional Branching 3
+date: '2026-01-28'
+category: java
+tags:
+  - java
+  - basics
+  - ★
+description: Program to display the number of days in a month
+time: '10:17:00'
+---
+
+## Program to Display the Number of Days in a Month
+Enter a month value (1 ~ 12) in the console  
+Write a program that displays the number of days from January to December.  
+Also, when a number other than 1 ~ 12 is entered, please display "Invalid input" on the console.  
+  
+Use a "switch statement" as the conditional branching statement.  
+
+#### Variable Declaration
+First, define variables  
+Declare x to receive input values and bool_x to validate the values.
+```java
+int x = 0;
+boolean bool_x = true;
+```
+
+#### Loop Processing
+Process to repeat when the value is not an integer after validation.
+```java
+do {
+    // When the value is an integer
+    bool_x = false;
+
+    // When the value is not an integer
+    bool_x = true
+}while(bool_x);
+```
+- After validating the input value, assign true or false to bool_x
+- Accordingly, when an incorrect value is entered, assign true to repeat the do-while loop.
+
+#### Validation
+Go through the validation process.
+```java
+String s_x = sc.next();
+try {
+    x = Integer.parseInt(s_x);
+    bool_x = false;
+}catch(NumberFormatException e) {
+    bool_x = true;
+    System.out.print("Invalid input. : ");
+}
+```
+
+#### Branching
+Perform branching using a switch statement.
+```java
+switch(x) {
+    case 1:
+        System.out.println("31 days.");
+        break;
+    case 2:
+        System.out.println("30 days.");
+        break;
+    case 3:
+        System.out.println("31 days.");
+        break;
+    case 4:
+        System.out.println("30 days.");
+        break;
+    case 5:
+        System.out.println("31 days.");
+        break;
+    case 6:
+        System.out.println("30 days.");
+        break;
+    case 7:
+        System.out.println("31 days.");
+        break;
+    case 8:
+        System.out.println("31 days.");
+        break;
+    case 9:
+        System.out.println("30 days.");
+        break;
+    case 10:
+        System.out.println("31 days.");
+        break;
+    case 11:
+        System.out.println("30 days.");
+        break;
+    case 12:
+        System.out.println("31 days.");
+        break;
+    default:
+        bool_x = true;
+        System.out.print("Invalid input. : ");
+    }
+```
+- When a number that does not match January through December is entered, use default to set bool_x to true so that input is received again.
+
+### Complete Code
+```java
+public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    
+    int x = 0;
+    boolean bool_x = true;
+    
+    System.out.print("Enter month : ");
+    do {
+        String s_x = sc.next();
+        try {
+            x = Integer.parseInt(s_x);
+            bool_x = false;
+            
+            switch(x) {
+            case 1:
+                System.out.println("31 days.");
+                break;
+            case 2:
+                System.out.println("30 days.");
+                break;
+            case 3:
+                System.out.println("31 days.");
+                break;
+            case 4:
+                System.out.println("30 days.");
+                break;
+            case 5:
+                System.out.println("31 days.");
+                break;
+            case 6:
+                System.out.println("30 days.");
+                break;
+            case 7:
+                System.out.println("31 days.");
+                break;
+            case 8:
+                System.out.println("31 days.");
+                break;
+            case 9:
+                System.out.println("30 days.");
+                break;
+            case 10:
+                System.out.println("31 days.");
+                break;
+            case 11:
+                System.out.println("30 days.");
+                break;
+            case 12:
+                System.out.println("31 days.");
+                break;
+            default:
+                bool_x = true;
+                System.out.print("Invalid input. : ");
+            }
+        }catch(NumberFormatException e) {
+            bool_x = true;
+            System.out.print("Invalid input. : ");
+        }
+    }while(bool_x);
+
+}
+```

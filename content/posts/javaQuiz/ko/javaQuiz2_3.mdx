@@ -1,0 +1,165 @@
+---
+title: 조건 분기3
+date: '2026-01-28'
+category: java
+tags:
+  - java
+  - 기초
+  - ★
+description: 월의 일수를 표시하는 프로그램
+time: '10:17:00'
+---
+
+## 월의 일수를 표시하는 프로그램
+콘솔에 월의 값(1 ~ 12)을 입력하여  
+1월부터 12월까지의 일수를 표시하는 프로그램을 작성하십시오.  
+또, 1 ~ 12 이외의 숫자를 입력했을 경우, 「입력이 잘못되어 있습니다」라고 콘솔에 표시해 주세요.  
+  
+조건 분기 구문으로 "switch 문"을 사용하십시오.  
+
+#### 변수선언
+우선 변수를 정의하면  
+입력값을 받을 x, 값을 검증할 bool_x를 선언한다.
+```java
+int x = 0;
+boolean bool_x = true;
+```
+
+#### 반복문 처리
+값을 검증 후 정수값이 아닌경우 반복되게 처리한다.
+```java
+do {
+    // 정수값인 경우
+    bool_x = false;
+
+    // 정수값이 아닌 경우
+    bool_x = true
+}while(bool_x);
+```
+- 입력받은 값을 검증 후 bool_x에 true 혹은 false 값을 대입한다
+- 그에 따라 잘못된 값을 입력한 경우 true를 대입하여 do-while 문을 반복하도록 한다.
+
+#### 검증
+검증 과정을 거친다.
+```java
+String s_x = sc.next();
+try {
+    x = Integer.parseInt(s_x);
+    bool_x = false;
+}catch(NumberFormatException e) {
+    bool_x = true;
+    System.out.print("입력이 잘못되었습니다. : ");
+}
+```
+
+#### 분기처리
+switch 문을 활용하여 분기처리를 진행한다.
+```java
+switch(x) {
+    case 1:
+        System.out.println("31일 까지 있습니다.");
+        break;
+    case 2:
+        System.out.println("30일 까지 있습니다.");
+        break;
+    case 3:
+        System.out.println("31일 까지 있습니다.");
+        break;
+    case 4:
+        System.out.println("30일 까지 있습니다.");
+        break;
+    case 5:
+        System.out.println("31일 까지 있습니다.");
+        break;
+    case 6:
+        System.out.println("30일 까지 있습니다.");
+        break;
+    case 7:
+        System.out.println("31일 까지 있습니다.");
+        break;
+    case 8:
+        System.out.println("31일 까지 있습니다.");
+        break;
+    case 9:
+        System.out.println("30일 까지 있습니다.");
+        break;
+    case 10:
+        System.out.println("31일 까지 있습니다.");
+        break;
+    case 11:
+        System.out.println("30일 까지 있습니다.");
+        break;
+    case 12:
+        System.out.println("31일 까지 있습니다.");
+        break;
+    default:
+        bool_x = true;
+        System.out.print("입력이 잘못되었습니다. : ");
+    }
+```
+- 1월 부터 12월 까지에 맞지않는 수를 입력한 경우 default 를 사용해서 bool_x에 true값을 적용하여 다시 입력값을 받도록 한다.
+
+### 전체코드
+```java
+public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    
+    int x = 0;
+    boolean bool_x = true;
+    
+    System.out.print("월을 입력하세요 : ");
+    do {
+        String s_x = sc.next();
+        try {
+            x = Integer.parseInt(s_x);
+            bool_x = false;
+            
+            switch(x) {
+            case 1:
+                System.out.println("31일 까지 있습니다.");
+                break;
+            case 2:
+                System.out.println("30일 까지 있습니다.");
+                break;
+            case 3:
+                System.out.println("31일 까지 있습니다.");
+                break;
+            case 4:
+                System.out.println("30일 까지 있습니다.");
+                break;
+            case 5:
+                System.out.println("31일 까지 있습니다.");
+                break;
+            case 6:
+                System.out.println("30일 까지 있습니다.");
+                break;
+            case 7:
+                System.out.println("31일 까지 있습니다.");
+                break;
+            case 8:
+                System.out.println("31일 까지 있습니다.");
+                break;
+            case 9:
+                System.out.println("30일 까지 있습니다.");
+                break;
+            case 10:
+                System.out.println("31일 까지 있습니다.");
+                break;
+            case 11:
+                System.out.println("30일 까지 있습니다.");
+                break;
+            case 12:
+                System.out.println("31일 까지 있습니다.");
+                break;
+            default:
+                bool_x = true;
+                System.out.print("입력이 잘못되었습니다. : ");
+            }
+        }catch(NumberFormatException e) {
+            bool_x = true;
+            System.out.print("입력이 잘못되었습니다. : ");
+        }
+    }while(bool_x);
+
+}
+```

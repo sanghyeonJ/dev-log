@@ -1,0 +1,107 @@
+---
+title: Conditional Branching 2
+date: '2026-01-28'
+category: java
+tags:
+  - java
+  - basics
+  - ★
+description: Conditional branching to distinguish positive/negative and even/odd numbers
+time: '09:49:00'
+---
+
+## Conditional Branching to Distinguish Positive/Negative and Even/Odd Numbers
+
+First, define variables  
+Declare x to receive input values and bool_x to validate the values.
+```java
+int x = 0;
+boolean bool_x = true;
+```
+
+#### Loop Processing
+Process to repeat when the value is not an integer after validation.
+```java
+do {
+    // When the value is an integer
+    bool_x = false;
+
+    // When the value is not an integer
+    bool_x = true
+}while(bool_x);
+```
+- After validating the input value, assign true or false to bool_x
+- Accordingly, when an incorrect value is entered, assign true to repeat the do-while loop.
+
+#### Validation
+Go through the validation process.
+```java
+String s_x = sc.next();
+try {
+    x = Integer.parseInt(s_x);
+    bool_x = false;
+}catch(NumberFormatException e) {
+    bool_x = true;
+    System.out.print("Please enter again : ");
+}
+```
+
+#### Branching
+Perform branching for the input value.
+```java
+if(x > 0) {
+    if(x % 2 == 0) {
+        System.out.println("Positive even number.");
+    }else {
+        System.out.println("Positive odd number.");
+    }
+}else if(x < 0) {
+    if(x % 2 == 0) {
+        System.out.println("Negative even number.");
+    }else {
+        System.out.println("Negative odd number.");
+    }
+}else {
+    System.out.println("Zero.");
+}
+```
+
+### Complete Code
+```java
+public static void main(String[] args) {
+        
+    Scanner sc = new Scanner(System.in);
+    
+    int x = 0;
+    boolean bool_x = true;
+    
+    System.out.print("Enter x : ");
+    do {
+        String s_x = sc.next();
+        try {
+            x = Integer.parseInt(s_x);
+            bool_x = false;
+            
+            if(x > 0) {
+                if(x % 2 == 0) {
+                    System.out.println("Positive even number.");
+                }else {
+                    System.out.println("Positive odd number.");
+                }
+            }else if(x < 0) {
+                if(x % 2 == 0) {
+                    System.out.println("Negative even number.");
+                }else {
+                    System.out.println("Negative odd number.");
+                }
+            }else {
+                System.out.println("Zero.");
+            }
+        }catch(NumberFormatException e) {
+            bool_x = true;
+            System.out.print("Please enter again : ");
+        }
+    }while(bool_x);
+
+}
+```

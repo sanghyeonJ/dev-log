@@ -1,0 +1,165 @@
+---
+title: 条件分岐3
+date: '2026-01-28'
+category: java
+tags:
+  - java
+  - 基礎
+  - ★
+description: 月の日数を表示するプログラム
+time: '10:17:00'
+---
+
+## 月の日数を表示するプログラム
+コンソールに月の値(1 ~ 12)を入力して  
+1月から12月までの日数を表示するプログラムを作成してください。  
+また、1 ~ 12以外の数字を入力した場合、「入力が正しくありません」とコンソールに表示してください。  
+  
+条件分岐構文として「switch文」を使用してください。  
+
+#### 変数宣言
+まず変数を定義すると  
+入力値を受け取るx、値を検証するbool_xを宣言する。
+```java
+int x = 0;
+boolean bool_x = true;
+```
+
+#### 繰り返し文処理
+値を検証後、整数値でない場合に繰り返されるように処理する。
+```java
+do {
+    // 整数値の場合
+    bool_x = false;
+
+    // 整数値でない場合
+    bool_x = true
+}while(bool_x);
+```
+- 入力された値を検証後、bool_xにtrueまたはfalseの値を代入する
+- それに応じて、誤った値を入力した場合はtrueを代入してdo-while文を繰り返すようにする。
+
+#### 検証
+検証過程を経る。
+```java
+String s_x = sc.next();
+try {
+    x = Integer.parseInt(s_x);
+    bool_x = false;
+}catch(NumberFormatException e) {
+    bool_x = true;
+    System.out.print("入力が正しくありません。 : ");
+}
+```
+
+#### 分岐処理
+switch文を活用して分岐処理を進める。
+```java
+switch(x) {
+    case 1:
+        System.out.println("31日あります。");
+        break;
+    case 2:
+        System.out.println("30日あります。");
+        break;
+    case 3:
+        System.out.println("31日あります。");
+        break;
+    case 4:
+        System.out.println("30日あります。");
+        break;
+    case 5:
+        System.out.println("31日あります。");
+        break;
+    case 6:
+        System.out.println("30日あります。");
+        break;
+    case 7:
+        System.out.println("31日あります。");
+        break;
+    case 8:
+        System.out.println("31日あります。");
+        break;
+    case 9:
+        System.out.println("30日あります。");
+        break;
+    case 10:
+        System.out.println("31日あります。");
+        break;
+    case 11:
+        System.out.println("30日あります。");
+        break;
+    case 12:
+        System.out.println("31日あります。");
+        break;
+    default:
+        bool_x = true;
+        System.out.print("入力が正しくありません。 : ");
+    }
+```
+- 1月から12月までに合わない数を入力した場合、defaultを使用してbool_xにtrue値を適用し、再度入力値を受け取るようにする。
+
+### 全体コード
+```java
+public static void main(String[] args) {
+    Scanner sc = new Scanner(System.in);
+    
+    int x = 0;
+    boolean bool_x = true;
+    
+    System.out.print("月を入力してください : ");
+    do {
+        String s_x = sc.next();
+        try {
+            x = Integer.parseInt(s_x);
+            bool_x = false;
+            
+            switch(x) {
+            case 1:
+                System.out.println("31日あります。");
+                break;
+            case 2:
+                System.out.println("30日あります。");
+                break;
+            case 3:
+                System.out.println("31日あります。");
+                break;
+            case 4:
+                System.out.println("30日あります。");
+                break;
+            case 5:
+                System.out.println("31日あります。");
+                break;
+            case 6:
+                System.out.println("30日あります。");
+                break;
+            case 7:
+                System.out.println("31日あります。");
+                break;
+            case 8:
+                System.out.println("31日あります。");
+                break;
+            case 9:
+                System.out.println("30日あります。");
+                break;
+            case 10:
+                System.out.println("31日あります。");
+                break;
+            case 11:
+                System.out.println("30日あります。");
+                break;
+            case 12:
+                System.out.println("31日あります。");
+                break;
+            default:
+                bool_x = true;
+                System.out.print("入力が正しくありません。 : ");
+            }
+        }catch(NumberFormatException e) {
+            bool_x = true;
+            System.out.print("入力が正しくありません。 : ");
+        }
+    }while(bool_x);
+
+}
+```
