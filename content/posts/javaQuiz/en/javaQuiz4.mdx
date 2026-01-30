@@ -1,0 +1,136 @@
+---
+title: Sorting - Quick Sort
+date: '2026-01-30'
+category: java
+tags:
+  - java
+  - basics
+  - ★★★★
+description: Sort array values in ascending order
+time: '15:50:00'
+---
+
+## Program to Sort Array Values in Ascending Order
+
+Create a program that sorts the numeric array {5, 10, 7, 8, 3, 1, 9, 2} in ascending order.  
+Use quick sort as the sorting method.
+
+### Quick Sort Summary
+
+- Partition the array into values smaller and larger than a single pivot value
+- Repeat the process by sorting each partition with quick sort again
+- What matters is the pivot value, not its position
+- Move smaller values to the left and larger values to the right of the pivot
+
+### 1. Set Pivot and Left/Right Pointers
+
+```java
+public static void sort(int[] arr, int left, int right){
+    int center = (left + right) / 2;
+    int pivot = arr[center];
+    int i = left;
+    int j = right;
+}
+```
+
+### 2. Move Pointers Until Values Are Found
+
+```java
+while(i <= j) {
+    while(arr[i] < pivot) i++;
+    while(arr[j] > pivot) j--;
+}
+```
+- Loop only while `i <= j` so execution continues until the left and right pointers cross
+- `while(arr[i] < pivot) i++;` : Skip while the left pointer value is less than pivot, move right; exit when a larger value is found
+- `while(arr[j] > pivot) j--;` : Skip while the right pointer value is greater than pivot, move left; exit when a smaller value is found
+
+### 3. Swap the Two Found Values
+
+```java
+while(i <= j) {
+    while(arr[i] < pivot) i++;
+    while(arr[j] > pivot) j--;
+    
+    if(i <= j) {
+        swap(arr, i, j);
+        i++;
+        j--;
+    }
+}
+
+public static void swap(int[] arr, int a, int b) {
+    int temp = arr[a];
+    arr[a] = arr[b];
+    arr[b] = temp;
+}
+```
+- Implement a swap method to exchange the two values
+- After swapping, move each pointer to the next position; repeat until they meet in the middle
+- Values smaller than pivot gather on the left, larger on the right
+
+### 4. Recursive Call
+
+```java
+public static void sort(int[] arr, int left, int right) {
+    if(left >= right) return;
+    ...
+    sort(arr, left, j);
+    sort(arr, i, right);
+}
+```
+- Split the left and right parts again
+- Recursively call until each subarray has size 1 or less
+- When no further split is possible, recursion ends and the whole array is sorted
+
+### 5. Declaration
+```java
+public static void main(String[] args) {
+
+    int[] arr = {5, 10, 7, 8, 3, 1, 9, 2};
+    
+    sort(arr, 0, arr.length-1);
+    
+}
+```
+- Indices start at 0, so pass length minus 1 as the right bound.
+
+### Complete Code
+```java
+public static void main(String[] args) {
+
+    int[] arr = {5, 10, 7, 8, 3, 1, 9, 2};
+    
+    sort(arr, 0, arr.length-1);
+    
+}
+
+public static void sort(int[] arr, int left, int right) {
+    if(left >= right) return;
+    
+    int center = (left + right) / 2;
+    int pivot = arr[center];
+    int i = left;
+    int j = right;
+    
+    while(i <= j) {
+        while(arr[i] < pivot) i++;
+        while(arr[j] > pivot) j--;
+        
+        if(i <= j) {
+            swap(arr, i, j);
+            i++;
+            j--;
+        }
+    }
+    
+    sort(arr, left, j);
+    sort(arr, i, right);
+}
+
+public static void swap(int[] arr, int a, int b) {
+    int temp = arr[a];
+    arr[a] = arr[b];
+    arr[b] = temp;
+}
+```

@@ -1,0 +1,85 @@
+---
+title: 最大公約数 / 最小公倍数
+date: '2026-01-30'
+category: java
+tags:
+  - java
+  - 基礎
+  - ★★★
+description: 最大公約数と最小公倍数を求める
+time: '21:20:00'
+---
+
+## 最大公約数の求め方
+
+最小公倍数を求めるには、まず最大公約数を求める。  
+最大公約数は、大きい数を小さい数で割って余りを求め、  
+小さい数でその余りをまた割る操作を繰り返す。  
+余りが0になったときの小さい数が最大公約数である。
+
+##### 例
+```bash
+48 % 18 = 12
+18 % 12 = 6
+12 % 6  = 0 
+```
+#### 最大公約数 = 6
+したがって  
+最大公約数のアルゴリズムは
+```java
+public static int maxDivFunc(int x, int y) {
+    while(y != 0) {
+        int z = x % y;
+        x = y;
+        y = z;
+    }
+    return x;
+}
+```
+
+## 最小公倍数の求め方
+
+最小公倍数は、2つの値の積を最大公約数で割った値である。  
+したがって  
+最小公倍数のアルゴリズムは
+```java
+public static int minMultFunc(int x, int y) {
+    int maxDiv = maxDivFunc(x, y);
+    int minMult = (x * y) / maxDiv;
+    return minMult;
+}
+```
+
+### 全体コード
+```java
+public static void main(String[] args) {
+        
+    Scanner sc = new Scanner(System.in);
+    
+    System.out.print("x : ");
+    int x = sc.nextInt();
+    System.out.print("y : ");
+    int y = sc.nextInt();
+    
+    int maxDiv = maxDivFunc(x, y);
+    int minMult = minMultFunc(x, y);
+    
+    System.out.println(maxDiv);
+    System.out.println(minMult);
+}
+
+public static int maxDivFunc(int x, int y) {
+    while(y != 0) {
+        int z = x % y;
+        x = y;
+        y = z;
+    }
+    return x;
+}
+
+public static int minMultFunc(int x, int y) {
+    int maxDiv = maxDivFunc(x, y);
+    int minMult = (x * y) / maxDiv;
+    return minMult;
+}
+```

@@ -1,0 +1,136 @@
+---
+title: ソート - クイックソート
+date: '2026-01-30'
+category: java
+tags:
+  - java
+  - 基礎
+  - ★★★★
+description: 配列の値を昇順でソート
+time: '15:50:00'
+---
+
+## 配列の値を昇順でソートするプログラム
+
+{5, 10, 7, 8, 3, 1, 9, 2} の数値配列を昇順でソートするプログラムを作成してください。  
+ソート方法はクイックソートを使用してください。
+
+### クイックソートの整理
+
+- 基準値（pivot）を1つ決め、配列をその値より大きい値と小さい値に分ける
+- 分けた部分を再びクイックソートでソートする処理を繰り返す
+- 重要なのはpivotの位置ではなく値である
+- pivotより小さい値は左へ、大きい値は右へ移す
+
+### 1. pivotと左右のポインタを設定
+
+```java
+public static void sort(int[] arr, int left, int right){
+    int center = (left + right) / 2;
+    int pivot = arr[center];
+    int i = left;
+    int j = right;
+}
+```
+
+### 2. 値が見つかるまでポインタを移動
+
+```java
+while(i <= j) {
+    while(arr[i] < pivot) i++;
+    while(arr[j] > pivot) j--;
+}
+```
+- 左右のポインタが交差するまで実行するため、`i <= j` が真の間だけ繰り返す
+- `while(arr[i] < pivot) i++;` : 左ポインタの値がpivotより小さい間は無視して右へ進め、大きい値が出たら抜けるwhile
+- `while(arr[j] > pivot) j--;` : 右ポインタの値がpivotより大きい間は無視して左へ進め、小さい値が出たら抜けるwhile
+
+### 3. 見つけた2つの値の位置を交換
+
+```java
+while(i <= j) {
+    while(arr[i] < pivot) i++;
+    while(arr[j] > pivot) j--;
+    
+    if(i <= j) {
+        swap(arr, i, j);
+        i++;
+        j--;
+    }
+}
+
+public static void swap(int[] arr, int a, int b) {
+    int temp = arr[a];
+    arr[a] = arr[b];
+    arr[b] = temp;
+}
+```
+- swapメソッドで2つの値の位置を交換する
+- 交換後、各ポインタを次の位置に進め、whileの条件で配列の中央に来るまで繰り返すと
+- 左側にはpivotより小さい値、右側にはpivotより大きい値だけが集まる
+
+### 4. 再帰呼び出し
+
+```java
+public static void sort(int[] arr, int left, int right) {
+    if(left >= right) return;
+    ...
+    sort(arr, left, j);
+    sort(arr, i, right);
+}
+```
+- 左部分と右部分をそれぞれ再び二つに分ける
+- 再帰呼び出しで部分配列のサイズが1以下になるまでこの処理を繰り返す
+- これ以上分けられなくなった時点で再帰が終了し、配列全体がソートされる
+
+### 5. 宣言
+```java
+public static void main(String[] args) {
+
+    int[] arr = {5, 10, 7, 8, 3, 1, 9, 2};
+    
+    sort(arr, 0, arr.length-1);
+    
+}
+```
+- インデックスは0から始まるため、要素数lengthから1を引いた値を渡す。
+
+### 全体コード
+```java
+public static void main(String[] args) {
+
+    int[] arr = {5, 10, 7, 8, 3, 1, 9, 2};
+    
+    sort(arr, 0, arr.length-1);
+    
+}
+
+public static void sort(int[] arr, int left, int right) {
+    if(left >= right) return;
+    
+    int center = (left + right) / 2;
+    int pivot = arr[center];
+    int i = left;
+    int j = right;
+    
+    while(i <= j) {
+        while(arr[i] < pivot) i++;
+        while(arr[j] > pivot) j--;
+        
+        if(i <= j) {
+            swap(arr, i, j);
+            i++;
+            j--;
+        }
+    }
+    
+    sort(arr, left, j);
+    sort(arr, i, right);
+}
+
+public static void swap(int[] arr, int a, int b) {
+    int temp = arr[a];
+    arr[a] = arr[b];
+    arr[b] = temp;
+}
+```

@@ -1,0 +1,85 @@
+---
+title: GCD / LCM
+date: '2026-01-30'
+category: java
+tags:
+  - java
+  - basics
+  - ★★★
+description: Finding GCD and LCM
+time: '21:20:00'
+---
+
+## Finding GCD (Greatest Common Divisor)
+
+To find the LCM, find the GCD first.  
+For the GCD: divide the larger number by the smaller, take the remainder,  
+then repeatedly divide the smaller by the remainder.  
+When the remainder becomes 0, the smaller number at that step is the GCD.
+
+##### Example
+```bash
+48 % 18 = 12
+18 % 12 = 6
+12 % 6  = 0 
+```
+#### GCD = 6
+Therefore  
+the GCD algorithm is:
+```java
+public static int maxDivFunc(int x, int y) {
+    while(y != 0) {
+        int z = x % y;
+        x = y;
+        y = z;
+    }
+    return x;
+}
+```
+
+## Finding LCM (Least Common Multiple)
+
+The LCM is the product of the two numbers divided by their GCD.  
+Therefore  
+the LCM algorithm is:
+```java
+public static int minMultFunc(int x, int y) {
+    int maxDiv = maxDivFunc(x, y);
+    int minMult = (x * y) / maxDiv;
+    return minMult;
+}
+```
+
+### Complete Code
+```java
+public static void main(String[] args) {
+        
+    Scanner sc = new Scanner(System.in);
+    
+    System.out.print("x : ");
+    int x = sc.nextInt();
+    System.out.print("y : ");
+    int y = sc.nextInt();
+    
+    int maxDiv = maxDivFunc(x, y);
+    int minMult = minMultFunc(x, y);
+    
+    System.out.println(maxDiv);
+    System.out.println(minMult);
+}
+
+public static int maxDivFunc(int x, int y) {
+    while(y != 0) {
+        int z = x % y;
+        x = y;
+        y = z;
+    }
+    return x;
+}
+
+public static int minMultFunc(int x, int y) {
+    int maxDiv = maxDivFunc(x, y);
+    int minMult = (x * y) / maxDiv;
+    return minMult;
+}
+```

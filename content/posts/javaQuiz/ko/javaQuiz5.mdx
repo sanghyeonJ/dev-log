@@ -1,0 +1,86 @@
+---
+title: 최대공약수 / 최소공배수
+date: '2026-01-30'
+category: java
+tags:
+  - java
+  - 기초
+  - ★★★
+description: 최대공약수와 최소공배수 구하기
+time: '21:20:00'
+---
+
+## 최대공약수 구하기
+
+최소 공배수를 구하기 위해서는 최대공약수를 먼저 구한다.  
+최대공약수는 큰수에서 작은수를 나누고 나머지를 구한 뒤  
+작은수에서 나머지를 다시 나누는 과정을 반복한다.  
+과정에서 나머지가 0이 되면 그때의 작은 수가 최대공약수이다.
+
+##### 예시
+```bash
+48 % 18 = 12
+18 % 12 = 6
+12 % 6  = 0 
+```
+#### 최대공약수 = 6
+따라서  
+최대공약수의 알고리즘은
+```java
+public static int maxDivFunc(int x, int y) {
+    while(y != 0) {
+        int z = x % y;
+        x = y;
+        y = z;
+    }
+    return x;
+}
+```
+
+## 최소공배수 구하기
+
+최소공배수는 두값의 곱에 최대공약수를 나눈 값이다  
+따라서  
+최소공배수의 알고리즘은
+```java
+public static int minMultFunc(int x, int y) {
+    int maxDiv = maxDivFunc(x, y);
+    int minMult = (x * y) / maxDiv;
+    return minMult;
+}
+```
+
+### 전체 코드
+```java
+public static void main(String[] args) {
+        
+    Scanner sc = new Scanner(System.in);
+    
+    System.out.print("x : ");
+    int x = sc.nextInt();
+    System.out.print("y : ");
+    int y = sc.nextInt();
+    
+    int maxDiv = maxDivFunc(x, y);
+    int minMult = minMultFunc(x, y);
+    
+    System.out.println(maxDiv);
+    System.out.println(minMult);
+}
+
+public static int maxDivFunc(int x, int y) {
+    while(y != 0) {
+        int z = x % y;
+        x = y;
+        y = z;
+    }
+    return x;
+}
+
+public static int minMultFunc(int x, int y) {
+    int maxDiv = maxDivFunc(x, y);
+    int minMult = (x * y) / maxDiv;
+    return minMult;
+}
+```
+
