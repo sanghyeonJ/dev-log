@@ -1,0 +1,47 @@
+---
+title: Sorting - Insertion Sort
+date: '2026-01-28'
+category: java
+tags:
+  - java
+  - basics
+  - ★★★★
+description: Sort array values in ascending order
+time: '11:39:00'
+---
+
+## Program to Sort Array Values in Ascending Order
+
+Create a program that sorts the numeric array 30, 355, 24, 12, 98, 72, 5, 76, 60, 35, 54, 62, 2, 12, 35 in ascending order.  
+Use insertion sort as the sorting method.  
+
+### Overview of Insertion Sort
+1. Assume the left portion is always sorted
+2. Take one element from the right
+3. Compare with the left and shift elements one position to the right until the correct position for the taken value is found
+4. Place the taken value in that position
+
+### Complete Code
+```java
+public static void main(String[] args) {
+
+    int[] arr = {30, 355, 24, 12, 98, 72, 5, 76, 60, 35, 54, 62, 2, 12, 35};
+    
+    // Assume first element is sorted, start comparing from the second as target
+    for(int i = 1; i < arr.length; i++) {
+        int target = arr[i];  // Value to insert
+        int j = i - 1;
+        
+        // If left value is greater than target, shift right by one
+        // and move comparison index left to compare with the next value
+        while( j >= 0 && arr[j] > target) {
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        
+        // Insert target at the correct position
+        arr[j+1] = target;
+    }
+
+}
+```
