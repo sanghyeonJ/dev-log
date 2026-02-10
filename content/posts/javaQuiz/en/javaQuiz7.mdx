@@ -1,0 +1,57 @@
+---
+title: Binary Conversion
+date: '2026-02-10'
+category: java
+tags:
+  - java
+  - basics
+  - ★★
+description: Convert input decimal number to binary
+time: '20:34:42'
+---
+
+## Binary Conversion
+
+- Binary is determined by the remainder when divided by 2.
+- The calculated remainder becomes the digit value from the back.
+- Therefore, it must be prepended to the string.
+
+### Binary Calculation Logic
+```java
+while (target > 0) {
+    result = target % 2 + result;
+    target = target / 2;
+}
+```
+Append the remainder when divided by 2 from the back.  
+For example, if target = 13:
+| Calculation | Remainder | result |
+|:---:|:---:|:---:|
+| 13/2 | 1 | "1" |
+| 6/2 | 0 | "01" |
+| 3/2 | 1 | "101" |
+| 1/2 | 1 | "1101" |
+
+```java
+public static void main(String[] args) {
+    
+    Scanner sc = new Scanner(System.in);
+    
+    System.out.print("target : ");
+    int target = sc.nextInt();
+    
+    String result = toBinary(target);
+    
+    System.out.println(result);
+}
+
+public static String toBinary(int target) {
+    String result = "";
+    while (target > 0) {
+        result = target % 2 + result;
+        target = target / 2;
+    }
+    
+    return result;
+}
+```

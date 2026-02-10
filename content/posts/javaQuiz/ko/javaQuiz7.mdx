@@ -1,0 +1,57 @@
+---
+title: 2진수 변환
+date: '2026-02-10'
+category: java
+tags:
+  - java
+  - 기초
+  - ★★
+description: 입력받은 10진수를 2진수로 변환
+time: '20:34:42'
+---
+
+## 2진수 변환
+
+- 2진수는 2로 나눈 나머지로 결정된다.
+- 계산된 나머지는 뒤에서부터 자릿값이 된다.
+- 그래서 문자열의 앞에 붙여야 한다.
+
+### 2진수 계산 로직
+```java
+while (target > 0) {
+    result = target % 2 + result;
+    target = target / 2;
+}
+```
+2로 나눈 나머지를 뒤에서부터 붙여준다.  
+예를 들어 target = 13 이라면
+| 계산 | 나머지 | result |
+|:---:|:---:|:---:|
+| 13/2 | 1 | "1" |
+| 6/2 | 0 | "01" |
+| 3/2 | 1 | "101" |
+| 1/2 | 1 | "1101" |
+
+```java
+public static void main(String[] args) {
+    
+    Scanner sc = new Scanner(System.in);
+    
+    System.out.print("target : ");
+    int target = sc.nextInt();
+    
+    String result = toBinary(target);
+    
+    System.out.println(result);
+}
+
+public static String toBinary(int target) {
+    String result = "";
+    while (target > 0) {
+        result = target % 2 + result;
+        target = target / 2;
+    }
+    
+    return result;
+}
+```

@@ -1,0 +1,74 @@
+---
+title: 화폐 계산
+date: '2026-02-10'
+category: java
+tags:
+  - java
+  - 기초
+  - ★★
+description: 가능한 적은 화폐로 지불 계산
+time: '20:13:42'
+---
+
+## 화폐 계산
+
+사용자가 입력한 금액을 100엔, 10엔, 5엔, 1엔 동전으로 나누어
+각 동전이 몇 개씩 필요한지 계산하는 프로그램을 만들어보자.  
+
+이 예제는 그리디 알고리즘(Greedy Algorithm) 의 대표적인 기초 사례다.
+
+### 핵심 아이디어
+1. 큰 동전부터 나눈다.
+2. 몫은 해당 동전의 개수
+3. 나머지는 다음 동전 계산에 사용
+4. 이 과정을 반복  
+##### `이렇게 하면 항상 최소 개수의 동전으로 거스름돈을 만들 수 있다.`
+
+### 동전 배열
+화폐 단위의 수정을 용이하게 하기위해 화폐 단위를 배열로 관리한다.
+```java
+int[] coins = {100, 10, 5, 1};
+```
+
+### 동전 계산
+입력한 금액을 큰 동전의 금액으로 나누어 필요한 동전의 개수를 구한다.  
+금액에 남은금액을 대입하여 다음 동전의 개수를 구하는데 사용한다.
+```java
+for (int i = 0; i < coins.length; i++) {
+    result[i] = price / coins[i]; // 몫 = 동전 개수
+    price = price % coins[i];     // 나머지 금액
+}
+```
+
+### 결과 출력
+for 문을 사용해서 화폐단위별 금액을 출력한다.
+```java
+for(int i = 0; i < coins.length; i++) {
+    System.out.println(coins[i] + "엔 화폐 : " + result[i] + "개");
+}
+```
+
+### 전체 코드
+```java
+public static void main(String[] args) {
+        
+    Scanner sc = new Scanner(System.in);
+    
+    System.out.print("price : ");
+    int price = sc.nextInt();
+    
+    int[] coins = {100, 10, 5, 1};
+    int[] result = new int[coins.length];
+    
+    for(int i = 0; i < coins.length; i++) {
+        result[i] = price / coins[i];
+        price = price % coins[i];
+    }
+    
+    for(int i = 0; i < coins.length; i++) {
+        System.out.println(coins[i] + "엔 화폐 : " + result[i] + "개");
+    }
+
+}
+```
+

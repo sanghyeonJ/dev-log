@@ -1,0 +1,57 @@
+---
+title: 2進数変換
+date: '2026-02-10'
+category: java
+tags:
+  - java
+  - 基礎
+  - ★★
+description: 入力された10進数を2進数に変換
+time: '20:34:42'
+---
+
+## 2進数変換
+
+- 2進数は2で割った余りで決定される。
+- 計算された余りは後ろから桁値になる。
+- そのため文字列の前に付けなければならない。
+
+### 2進数計算ロジック
+```java
+while (target > 0) {
+    result = target % 2 + result;
+    target = target / 2;
+}
+```
+2で割った余りを後ろから付けていく。  
+例えば target = 13 の場合
+| 計算 | 余り | result |
+|:---:|:---:|:---:|
+| 13/2 | 1 | "1" |
+| 6/2 | 0 | "01" |
+| 3/2 | 1 | "101" |
+| 1/2 | 1 | "1101" |
+
+```java
+public static void main(String[] args) {
+    
+    Scanner sc = new Scanner(System.in);
+    
+    System.out.print("target : ");
+    int target = sc.nextInt();
+    
+    String result = toBinary(target);
+    
+    System.out.println(result);
+}
+
+public static String toBinary(int target) {
+    String result = "";
+    while (target > 0) {
+        result = target % 2 + result;
+        target = target / 2;
+    }
+    
+    return result;
+}
+```

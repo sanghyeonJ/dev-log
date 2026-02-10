@@ -1,0 +1,73 @@
+---
+title: 通貨計算
+date: '2026-02-10'
+category: java
+tags:
+  - java
+  - 基礎
+  - ★★
+description: 最小限の通貨で支払いを計算
+time: '20:13:42'
+---
+
+## 通貨計算
+
+ユーザーが入力した金額を100円、10円、5円、1円硬貨に分けて
+各硬貨が何枚ずつ必要かを計算するプログラムを作ってみよう。  
+
+この例は貪欲法（Greedy Algorithm）の代表的な基礎事例である。
+
+### 核心アイデア
+1. 大きい硬貨から割る。
+2. 商はその硬貨の枚数
+3. 余りは次の硬貨計算に使用
+4. この過程を繰り返す  
+##### `このようにすると、常に最小枚数の硬貨でおつりを作ることができる。`
+
+### 硬貨配列
+通貨単位の修正を容易にするため、通貨単位を配列で管理する。
+```java
+int[] coins = {100, 10, 5, 1};
+```
+
+### 硬貨計算
+入力した金額を大きい硬貨の金額で割って必要な硬貨の枚数を求める。  
+金額に残りの金額を代入して次の硬貨の枚数を求めるのに使用する。
+```java
+for (int i = 0; i < coins.length; i++) {
+    result[i] = price / coins[i]; // 商 = 硬貨の枚数
+    price = price % coins[i];     // 残りの金額
+}
+```
+
+### 結果出力
+for文を使用して通貨単位別の金額を出力する。
+```java
+for(int i = 0; i < coins.length; i++) {
+    System.out.println(coins[i] + "円硬貨 : " + result[i] + "枚");
+}
+```
+
+### 全体コード
+```java
+public static void main(String[] args) {
+        
+    Scanner sc = new Scanner(System.in);
+    
+    System.out.print("price : ");
+    int price = sc.nextInt();
+    
+    int[] coins = {100, 10, 5, 1};
+    int[] result = new int[coins.length];
+    
+    for(int i = 0; i < coins.length; i++) {
+        result[i] = price / coins[i];
+        price = price % coins[i];
+    }
+    
+    for(int i = 0; i < coins.length; i++) {
+        System.out.println(coins[i] + "円硬貨 : " + result[i] + "枚");
+    }
+
+}
+```

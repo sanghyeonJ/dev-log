@@ -1,0 +1,73 @@
+---
+title: Currency Calculation
+date: '2026-02-10'
+category: java
+tags:
+  - java
+  - basics
+  - ★★
+description: Calculate payment with minimum currency
+time: '20:13:42'
+---
+
+## Currency Calculation
+
+Let's create a program that divides the amount entered by the user into 100 yen, 10 yen, 5 yen, and 1 yen coins
+and calculates how many of each coin are needed.  
+
+This example is a representative basic case of the Greedy Algorithm.
+
+### Key Idea
+1. Divide starting from the largest coin.
+2. The quotient is the number of that coin
+3. The remainder is used for the next coin calculation
+4. Repeat this process  
+##### `This way, you can always make change with the minimum number of coins.`
+
+### Coin Array
+To make it easy to modify currency denominations, manage currency denominations as an array.
+```java
+int[] coins = {100, 10, 5, 1};
+```
+
+### Coin Calculation
+Divide the entered amount by the value of the larger coin to find the number of coins needed.  
+Assign the remaining amount to the price variable to use for calculating the number of the next coin.
+```java
+for (int i = 0; i < coins.length; i++) {
+    result[i] = price / coins[i]; // quotient = number of coins
+    price = price % coins[i];     // remaining amount
+}
+```
+
+### Result Output
+Use a for loop to output the amount for each currency denomination.
+```java
+for(int i = 0; i < coins.length; i++) {
+    System.out.println(coins[i] + " yen coin : " + result[i] + " pieces");
+}
+```
+
+### Complete Code
+```java
+public static void main(String[] args) {
+        
+    Scanner sc = new Scanner(System.in);
+    
+    System.out.print("price : ");
+    int price = sc.nextInt();
+    
+    int[] coins = {100, 10, 5, 1};
+    int[] result = new int[coins.length];
+    
+    for(int i = 0; i < coins.length; i++) {
+        result[i] = price / coins[i];
+        price = price % coins[i];
+    }
+    
+    for(int i = 0; i < coins.length; i++) {
+        System.out.println(coins[i] + " yen coin : " + result[i] + " pieces");
+    }
+
+}
+```
